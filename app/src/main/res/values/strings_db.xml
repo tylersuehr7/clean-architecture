@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- DATABASE LOGIC (DON'T MESS WITH THIS!) -->
+    <string name="table_phones_create">
+        CREATE TABLE [phones] (
+            [id] TEXT UNIQUE PRIMARY KEY,
+            [brand] TEXT NOT NULL,
+            [model] TEXT NOT NULL,
+            [price] REAL DEFAULT 0,
+            [iconResName] TEXT,
+            [providers] TEXT
+        );
+    </string>
+    <string name="table_tablets_create">
+        CREATE TABLE [tablets] (
+            [id] TEXT UNIQUE PRIMARY KEY,
+            [brand] TEXT NOT NULL,
+            [model] TEXT NOT NULL,
+            [price] REAL DEFAULT 0,
+            [iconResName] TEXT,
+            [size] INTEGER DEFAULT 0
+        );
+    </string>
+    <string name="table_watches_create">
+        CREATE TABLE [watches] (
+            [id] TEXT UNIQUE PRIMARY KEY,
+            [brand] TEXT NOT NULL,
+            [model] TEXT NOT NULL,
+            [price] REAL DEFAULT 0,
+            [iconResName] TEXT,
+            [isCircular] INTEGER DEFAULT 0
+        );
+    </string>
+    <string name="table_users_create">
+        CREATE TABLE [users] (
+            [id] TEXT UNIQUE PRIMARY KEY,
+            [firstName] TEXT NOT NULL,
+            [lastName] TEXT NOT NULL,
+            [email] TEXT
+        );
+    </string>
+</resources>
