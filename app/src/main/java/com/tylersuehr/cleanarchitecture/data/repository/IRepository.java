@@ -10,7 +10,6 @@ import java.util.Collection;
  * EX: Local, Cloud, Disk...etc
  */
 public interface IRepository<T extends Entity> {
-    String addAll(Collection<T> e);
     String add(T e);
     String update(T e);
     String remove(T e); // Null to remove all

@@ -17,7 +17,8 @@ public class Phone extends Technology {
         return eligibleProviders;
     }
 
-    public void addEligibleProvider(String name) {
+    public Phone addEligibleProvider(String name) {
         this.eligibleProviders.add(name);
+        return this;
     }
 }

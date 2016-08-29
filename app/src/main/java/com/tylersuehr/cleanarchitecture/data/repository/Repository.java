@@ -33,16 +33,6 @@ public class Repository<T extends Entity> implements IRepository<T> {
     }
 
     @Override
-    public String addAll(Collection<T> entities) {
-        SQLiteDatabase db = open();
-        for (T e : entities) {
-            db.insert(table, null, mapper.toContentValues(e));
-        }
-        manager.close();
-        return "";
-    }
-
-    @Override
     public String add(T e) {
         SQLiteDatabase db = open();
         db.insert(table, null, mapper.toContentValues(e));
