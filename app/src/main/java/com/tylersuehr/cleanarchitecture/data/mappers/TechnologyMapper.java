@@ -1,7 +1,6 @@
 package com.tylersuehr.cleanarchitecture.data.mappers;
 import android.content.ContentValues;
 import android.database.Cursor;
-import com.tylersuehr.cleanarchitecture.data.models.Entity;
 import com.tylersuehr.cleanarchitecture.data.models.Technology;
 /**
  * Copyright 2016 Tyler Suehr

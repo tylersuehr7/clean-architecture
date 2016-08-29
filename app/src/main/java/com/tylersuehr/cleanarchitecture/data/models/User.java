@@ -1,5 +1,4 @@
 package com.tylersuehr.cleanarchitecture.data.models;
-import android.content.ContentValues;
 /**
  * Copyright 2016 Tyler Suehr
  * Created by tyler on 8/28/2016.

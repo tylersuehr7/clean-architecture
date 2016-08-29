@@ -26,6 +26,7 @@ public class MainActivity extends BaseActivity implements ITask {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setEnterTransition(android.R.transition.explode);
         setContentView(R.layout.activity_main);
 
         // Setup recycler

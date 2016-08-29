@@ -12,7 +12,7 @@ public class UserMapper extends Mapper<User> {
         User user = new User();
         user.setId(c.getString(c.getColumnIndex("id")));
         user.setFirstName(c.getString(c.getColumnIndex("firstName")));
-        user.setLastName(c.getString(c.getColumnIndex("lastName")));;
+        user.setLastName(c.getString(c.getColumnIndex("lastName")));
         user.setEmail(c.getString(c.getColumnIndex("email")));
         return user;
     }
