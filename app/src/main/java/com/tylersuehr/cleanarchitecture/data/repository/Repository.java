@@ -3,7 +3,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.util.Log;
 import com.tylersuehr.cleanarchitecture.data.DatabaseManager;
-import com.tylersuehr.cleanarchitecture.data.mappers.IMapper;
+import com.tylersuehr.cleanarchitecture.data.mappers.Mapper;
 import com.tylersuehr.cleanarchitecture.data.models.Entity;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -20,35 +20,35 @@ import java.util.List;
 public class Repository<T extends Entity> implements IRepository<T> {
     private static final String TAG = "REPO >";
     private DatabaseManager manager;
-    private IMapper<T> mapper;
+    private Mapper<T> mapper;
     private String table;
     private Context c;
 
 
-    public Repository(Context c, String table, IMapper<T> mapper) {
+    public Repository(Context c, String table, Mapper<T> mapper) {
         this.mapper = mapper;
         this.table = table;
         this.c = c;
     }
 
     @Override
-    public String add(Entity e) {
+    public String add(T e) {
         manager = new DatabaseManager(c);
-        manager.getDb().insert(table, null, e.toContentValues());
+        manager.getDb().insert(table, null, mapper.toContentValues(e));
         manager.close();
         return "";
     }
 
     @Override
-    public String update(Entity e) {
+    public String update(T e) {
         manager = new DatabaseManager(c);
-        manager.getDb().update(table, e.toContentValues(), e.toString(), null);
+        manager.getDb().update(table, mapper.toContentValues(e), e.toString(), null);
         manager.close();
         return "";
     }
 
     @Override
-    public String remove(Entity e) {
+    public String remove(T e) {
         manager = new DatabaseManager(c);
         manager.getDb().delete(table, e != null ? e.toString() : null, null);
         manager.close();
@@ -56,7 +56,7 @@ public class Repository<T extends Entity> implements IRepository<T> {
     }
 
     @Override
-    public boolean exits(Entity e) {
+    public boolean exits(T e) {
         manager = new DatabaseManager(c);
         Cursor c = manager.getDb().query(table, null, e.toString(), null, null, null, null);
         int count = c.getCount();

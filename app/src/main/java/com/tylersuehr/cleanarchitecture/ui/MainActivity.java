@@ -1,20 +1,24 @@
 package com.tylersuehr.cleanarchitecture.ui;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import com.tylersuehr.cleanarchitecture.R;
 import com.tylersuehr.cleanarchitecture.data.models.Phone;
 import com.tylersuehr.cleanarchitecture.data.models.Tablet;
 import com.tylersuehr.cleanarchitecture.data.models.User;
 import com.tylersuehr.cleanarchitecture.data.models.Watch;
 import com.tylersuehr.cleanarchitecture.data.repository.RepositoryManager;
+import com.tylersuehr.cleanarchitecture.tasks.FindTask;
+import com.tylersuehr.cleanarchitecture.tasks.ITask;
 import com.tylersuehr.cleanarchitecture.ui.adapters.ItemAdapter;
 import com.tylersuehr.cleanarchitecture.ui.utils.TestingUtils;
 import com.tylersuehr.cleanarchitecture.ui.views.CardSpacer;
+import java.util.Collection;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends BaseActivity implements ITask {
     private RepositoryManager manager;
     private ItemAdapter adapter;
 
@@ -32,14 +36,12 @@ public class MainActivity extends AppCompatActivity {
 
         // Show all local data
         manager = RepositoryManager.getInstance(this);
-        for (User user : manager.getUsers().find(null, null, null))
-            adapter.add(user);
-        for (Phone phone : manager.getPhones().find(null, null, null))
-            adapter.add(phone);
-        for (Tablet tablet : manager.getTablets().find(null, null, null))
-            adapter.add(tablet);
-        for (Watch watch : manager.getWatches().find(null, null, null))
-            adapter.add(watch);
+        new FindTask(manager, this).setCallback(this).execute();
+    }
+
+    @Override
+    public void onTaskCompleted(Collection<Object> objects) {
+        adapter.addAll(objects);
     }
 
     @Override
@@ -72,7 +74,19 @@ public class MainActivity extends AppCompatActivity {
                 manager.getWatches().add(watch);
                 break;
             case R.id.action_clear:
-                // TODO: Remove all database items
+                Snackbar snack = longSnack("Are you sure you want to clear all items?");
+                snack.setAction("Delete", new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        manager.getUsers().remove(null);
+                        manager.getPhones().remove(null);
+                        manager.getTablets().remove(null);
+                        manager.getWatches().remove(null);
+                        adapter.clear();
+                        shortSnack("Items cleared!").show();
+                    }
+                });
+                snack.show();
                 break;
             case R.id.action_about:
                 // TODO: Open about activity

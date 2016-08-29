@@ -1,4 +1,5 @@
 package com.tylersuehr.cleanarchitecture.data.mappers;
+import android.content.ContentValues;
 import android.database.Cursor;
 import com.tylersuehr.cleanarchitecture.data.models.Watch;
 /**
@@ -12,5 +13,12 @@ public class WatchMapper extends TechnologyMapper<Watch> {
         watch.setTechnology(mapTechnology(c));
         watch.setCircular(c.getInt(c.getColumnIndex("isCircular")) == 1);
         return watch;
+    }
+
+    @Override
+    public ContentValues toContentValues(Watch w) {
+        ContentValues values = super.toContentValues(w);
+        values.put("isCircular", w.isCircular());
+        return values;
     }
 }

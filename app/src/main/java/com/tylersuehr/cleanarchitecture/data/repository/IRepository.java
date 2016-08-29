@@ -10,10 +10,10 @@ import java.util.Collection;
  * EX: Local, Cloud, Disk...etc
  */
 public interface IRepository<T extends Entity> {
-    String add(Entity e);
-    String update(Entity e);
-    String remove(Entity e); // Null to remove all
-    boolean exits(Entity e);
+    String add(T e);
+    String update(T e);
+    String remove(T e); // Null to remove all
+    boolean exits(T e);
     T findById(String id);
     Collection<T> find(String where, String order, String limit);
     Collection<T> find(String sql);

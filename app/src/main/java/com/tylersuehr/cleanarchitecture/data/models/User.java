@@ -18,15 +18,6 @@ public class User extends Entity {
         this.email = email;
     }
 
-    @Override
-    public ContentValues toContentValues() {
-        ContentValues values = super.toContentValues();
-        values.put("firstName", firstName);
-        values.put("lastName", lastName);
-        values.put("email", email);
-        return values;
-    }
-
     public String getEmail() {
         return email;
     }

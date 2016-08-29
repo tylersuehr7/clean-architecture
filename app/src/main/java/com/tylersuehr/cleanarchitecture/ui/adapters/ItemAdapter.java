@@ -6,7 +6,6 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 import com.tylersuehr.cleanarchitecture.R;
-import com.tylersuehr.cleanarchitecture.data.models.Entity;
 import com.tylersuehr.cleanarchitecture.data.models.Phone;
 import com.tylersuehr.cleanarchitecture.data.models.Tablet;
 import com.tylersuehr.cleanarchitecture.data.models.Technology;
@@ -24,7 +23,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.Holder> {
     private static final int PHONE = 1;
     private static final int TABLET = 2;
     private static final int WATCH = 3;
-    private List<Entity> items;
+    private List<Object> items;
 
 
     public ItemAdapter() {
@@ -91,21 +90,13 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.Holder> {
         }
     }
 
-    public void add(Entity e) {
+    public void add(Object e) {
         this.items.add(e);
         this.notifyItemInserted(getActualCount());
     }
 
-    public void addAll(Collection<? extends Entity> entities) {
-        int count = getActualCount();
-        for (Entity e : entities) {
-            this.items.add(e);
-        }
-        this.notifyItemRangeInserted(count, getActualCount());
-    }
-
-    public void replaceAll(List<Entity> entities) {
-        this.items = entities;
+    public void addAll(Collection<Object> objects) {
+        this.items = (List<Object>)objects;
         this.notifyItemRangeInserted(0, getActualCount());
     }
 

@@ -1,5 +1,4 @@
 package com.tylersuehr.cleanarchitecture.data.models;
-import android.content.ContentValues;
 import android.content.res.Resources;
 /**
  * Copyright 2016 Tyler Suehr
@@ -15,16 +14,6 @@ public class Technology extends Entity {
 
 
     public Technology() {}
-
-    @Override
-    public ContentValues toContentValues() {
-        ContentValues values = super.toContentValues();
-        values.put("brand", brand);
-        values.put("model", model);
-        values.put("price", price);
-        values.put("iconResName", iconResName);
-        return values;
-    }
 
     public void setTechnology(Technology tech) {
         this.brand = tech.brand;

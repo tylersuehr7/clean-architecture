@@ -1,4 +1,5 @@
 package com.tylersuehr.cleanarchitecture.data.mappers;
+import android.content.ContentValues;
 import android.database.Cursor;
 import com.tylersuehr.cleanarchitecture.data.models.Phone;
 /**
@@ -16,4 +17,13 @@ public class PhoneMapper extends TechnologyMapper<Phone> {
         }
         return phone;
     }
+
+    @Override
+    public ContentValues toContentValues(Phone p) {
+        ContentValues values = super.toContentValues(p);
+        values.put("providers", p.getEligibleProviders().toString()
+                .replace("[", "").replace("]", ""));
+        return values;
+    }
+
 }
