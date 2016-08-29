@@ -1,5 +1,4 @@
 package com.tylersuehr.cleanarchitecture.data.mappers;
-import android.content.ContentValues;
 import android.database.Cursor;
 import com.tylersuehr.cleanarchitecture.data.models.Phone;
 /**
@@ -9,19 +8,12 @@ import com.tylersuehr.cleanarchitecture.data.models.Phone;
 public class PhoneMapper extends TechnologyMapper<Phone> {
     @Override
     public Phone map(Cursor c) {
-        Phone phone = (Phone)mapTechnology(c);
+        Phone phone = new Phone();
+        phone.setTechnology(mapTechnology(c));
         String[] providers = c.getString(c.getColumnIndex("providers")).split(",");
         for (String p : providers) {
             phone.addEligibleProvider(p);
         }
         return phone;
-    }
-
-    @Override
-    public ContentValues toContentValues(Phone o) {
-        ContentValues values = super.toContentValues(o);
-        values.put("providers", o.getEligibleProviders().toString()
-                .replace("[", "").replace("]", ""));
-        return values;
     }
 }

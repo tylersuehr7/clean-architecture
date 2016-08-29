@@ -1,12 +1,11 @@
 package com.tylersuehr.cleanarchitecture.data.mappers;
-import android.content.ContentValues;
 import android.database.Cursor;
 import com.tylersuehr.cleanarchitecture.data.models.User;
 /**
  * Copyright 2016 Tyler Suehr
  * Created by tyler on 8/28/2016.
  */
-public class UserMapper extends Mapper<User> {
+public class UserMapper implements IMapper<User> {
     @Override
     public User map(Cursor c) {
         User user = new User();
@@ -15,14 +14,5 @@ public class UserMapper extends Mapper<User> {
         user.setLastName(c.getString(c.getColumnIndex("lastName")));;
         user.setEmail(c.getString(c.getColumnIndex("email")));
         return user;
-    }
-
-    @Override
-    public ContentValues toContentValues(User o) {
-        ContentValues values = super.toContentValues(o);
-        values.put("firstName", o.getFirstName());
-        values.put("lastName", o.getLastName());
-        values.put("email", o.getEmail());
-        return values;
     }
 }

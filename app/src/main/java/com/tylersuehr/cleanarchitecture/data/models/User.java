@@ -1,4 +1,5 @@
 package com.tylersuehr.cleanarchitecture.data.models;
+import android.content.ContentValues;
 /**
  * Copyright 2016 Tyler Suehr
  * Created by tyler on 8/28/2016.
@@ -15,6 +16,15 @@ public class User extends Entity {
         this.firstName = first;
         this.lastName = last;
         this.email = email;
+    }
+
+    @Override
+    public ContentValues toContentValues() {
+        ContentValues values = super.toContentValues();
+        values.put("firstName", firstName);
+        values.put("lastName", lastName);
+        values.put("email", email);
+        return values;
     }
 
     public String getEmail() {

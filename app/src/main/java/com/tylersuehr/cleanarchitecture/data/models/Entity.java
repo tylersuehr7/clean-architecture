@@ -1,4 +1,6 @@
 package com.tylersuehr.cleanarchitecture.data.models;
+import android.content.ContentValues;
+import android.support.annotation.CallSuper;
 import java.util.UUID;
 /**
  * Copyright 2016 Tyler Suehr
@@ -22,6 +24,13 @@ public class Entity {
     public String toString() {
         // Return SQL query for convenience
         return "[id]='" + id.toString() + "'";
+    }
+
+    @CallSuper
+    public ContentValues toContentValues() {
+        ContentValues values = new ContentValues();
+        values.put("id", id.toString());
+        return values;
     }
 
     public UUID getId() {
