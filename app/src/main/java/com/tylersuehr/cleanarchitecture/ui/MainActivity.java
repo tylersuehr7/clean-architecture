@@ -16,14 +16,14 @@ import com.tylersuehr.cleanarchitecture.data.repository.RepositoryManager;
 import com.tylersuehr.cleanarchitecture.tasks.FindAllTask;
 import com.tylersuehr.cleanarchitecture.tasks.ITask;
 import com.tylersuehr.cleanarchitecture.tasks.TaskExecutor;
-import com.tylersuehr.cleanarchitecture.ui.adapters.ItemAdapter;
+import com.tylersuehr.cleanarchitecture.ui.adapters.PlaceholderItemAdapter;
 import com.tylersuehr.cleanarchitecture.ui.utils.TestingUtils;
 import com.tylersuehr.cleanarchitecture.ui.views.CardSpacer;
 import java.util.Collection;
 
 public class MainActivity extends BaseActivity implements ITask {
+    private PlaceholderItemAdapter adapter;
     private RepositoryManager manager;
-    private ItemAdapter adapter;
 
 
     @Override
@@ -32,10 +32,11 @@ public class MainActivity extends BaseActivity implements ITask {
         setContentView(R.layout.activity_main);
 
         // Setup recycler
-        adapter = new ItemAdapter();
+        adapter = new PlaceholderItemAdapter();
         RecyclerView recycler = (RecyclerView)findViewById(R.id.recycler);
         recycler.setAdapter(adapter);
         recycler.addItemDecoration(new CardSpacer());
+        adapter.setDelegate(recycler);
         manager = RepositoryManager.getInstance(this);
     }
 
