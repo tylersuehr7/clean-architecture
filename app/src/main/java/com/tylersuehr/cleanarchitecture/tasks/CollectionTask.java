@@ -6,6 +6,10 @@ import java.util.Collection;
 /**
  * Copyright 2016 Tyler Suehr
  * Created by tyler on 8/29/2016.
+ *
+ * This is an abstraction that allows us to process searching
+ * for a collection of objects and posting the results back on
+ * the main thread triggering any callbacks available.
  */
 public abstract class CollectionTask extends AsyncTask<Object, Void, Collection<Object>> {
     protected IRepositoryManager manager;

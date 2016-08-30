@@ -13,4 +13,6 @@
     <color name="grey.200">#EEEEEE</color>
     <color name="grey.600">#757575</color>
     <color name="grey.900">#212121</color>
+
+    <color name="scrim">#99323232</color>
 </resources>

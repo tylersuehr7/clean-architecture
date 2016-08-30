@@ -6,9 +6,12 @@ import java.util.Collection;
 /**
  * Copyright 2016 Tyler Suehr
  * Created by tyler on 8/29/2016.
+ *
+ * This task allows us to find all objects from all tables in our database
+ * and return them as a collection of objects.
  */
-public class FindTask extends CollectionTask {
-    public FindTask(IRepositoryManager m, Context c) {
+public class FindAllTask extends CollectionTask {
+    public FindAllTask(IRepositoryManager m, Context c) {
         super(m, c);
     }
 

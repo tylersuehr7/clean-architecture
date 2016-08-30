@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.tylersuehr.cleanarchitecture.ui.views.ElasticFrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/drag_container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:dragDismissDistance="112dp"
+    app:dragDismissScale="0.95"
+    tools:targetApi="lollipop">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:nestedScrollingEnabled="true">
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:background="@color/teal.500"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/help_banner_height"
+                android:padding="@dimen/padding_large"
+                android:gravity="center"
+                android:textAllCaps="true"
+                android:fontFamily="sans-serif-medium"
+                android:textSize="@dimen/text_h2"
+                android:textColor="@color/teal.900"
+                android:text="@string/app_name_enter"/>
+            <TextView
+                android:id="@+id/description"
+                android:background="@color/grey.100"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:padding="@dimen/padding_large"
+                android:textSize="@dimen/text_title"
+                android:textColor="@color/grey.600"
+                tools:text="This is an Android app..."/>
+        </LinearLayout>
+    </ScrollView>
+</com.tylersuehr.cleanarchitecture.ui.views.ElasticFrameLayout>

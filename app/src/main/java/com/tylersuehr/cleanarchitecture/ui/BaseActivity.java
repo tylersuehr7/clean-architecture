@@ -28,4 +28,11 @@ public class BaseActivity extends AppCompatActivity {
             getWindow().setEnterTransition(trans);
         }
     }
+
+    protected void setReturnTransition(@TransitionRes int res) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            Transition trans = TransitionInflater.from(this).inflateTransition(res);
+            getWindow().setReturnTransition(trans);
+        }
+    }
 }

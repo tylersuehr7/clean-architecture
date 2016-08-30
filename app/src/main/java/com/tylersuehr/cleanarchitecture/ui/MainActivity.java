@@ -1,6 +1,8 @@
 package com.tylersuehr.cleanarchitecture.ui;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -11,8 +13,9 @@ import com.tylersuehr.cleanarchitecture.data.models.Tablet;
 import com.tylersuehr.cleanarchitecture.data.models.User;
 import com.tylersuehr.cleanarchitecture.data.models.Watch;
 import com.tylersuehr.cleanarchitecture.data.repository.RepositoryManager;
-import com.tylersuehr.cleanarchitecture.tasks.FindTask;
+import com.tylersuehr.cleanarchitecture.tasks.FindAllTask;
 import com.tylersuehr.cleanarchitecture.tasks.ITask;
+import com.tylersuehr.cleanarchitecture.tasks.TaskExecutor;
 import com.tylersuehr.cleanarchitecture.ui.adapters.ItemAdapter;
 import com.tylersuehr.cleanarchitecture.ui.utils.TestingUtils;
 import com.tylersuehr.cleanarchitecture.ui.views.CardSpacer;
@@ -26,7 +29,6 @@ public class MainActivity extends BaseActivity implements ITask {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setEnterTransition(android.R.transition.explode);
         setContentView(R.layout.activity_main);
 
         // Setup recycler
@@ -34,14 +36,31 @@ public class MainActivity extends BaseActivity implements ITask {
         RecyclerView recycler = (RecyclerView)findViewById(R.id.recycler);
         recycler.setAdapter(adapter);
         recycler.addItemDecoration(new CardSpacer());
-
-        // Show all local data
         manager = RepositoryManager.getInstance(this);
-        new FindTask(manager, this).setCallback(this).execute();
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        // Register our activity for task callbacks
+        TaskExecutor.register(this);
+
+        // Load all data from our database
+        TaskExecutor.execute(new FindAllTask(manager, this));
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+
+        // Unregister our activity for task callbacks
+        TaskExecutor.unregister(this);
     }
 
     @Override
     public void onTaskCompleted(Collection<Object> objects) {
+        // Add all the items loaded into our recycler adapter
         adapter.addAll(objects);
     }
 
@@ -52,29 +71,35 @@ public class MainActivity extends BaseActivity implements ITask {
     }
 
     @Override
+    @SuppressWarnings("unchecked")
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_user:
+                // Add a test user
                 User user = TestingUtils.createTestUser();
                 adapter.add(user);
                 manager.getUsers().add(user);
                 break;
             case R.id.action_phone:
+                // Add a test phone
                 Phone phone = TestingUtils.createTestPhone(this);
                 adapter.add(phone);
                 manager.getPhones().add(phone);
                 break;
             case R.id.action_tablet:
+                // Add a test tablet
                 Tablet tablet = TestingUtils.createTestTablet(this);
                 adapter.add(tablet);
                 manager.getTablets().add(tablet);
                 break;
             case R.id.action_watch:
+                // Add a test watch
                 Watch watch = TestingUtils.createTestWatch(this);
                 adapter.add(watch);
                 manager.getWatches().add(watch);
                 break;
             case R.id.action_clear:
+                // Ask to remove items. If confirmed, remove all items in database
                 Snackbar snack = longSnack("Are you sure you want to clear all items?");
                 snack.setAction("Delete", new View.OnClickListener() {
                     @Override
@@ -90,7 +115,9 @@ public class MainActivity extends BaseActivity implements ITask {
                 snack.show();
                 break;
             case R.id.action_about:
-                // TODO: Open about activity
+                // Open the help activity
+                ActivityOptionsCompat op = ActivityOptionsCompat.makeSceneTransitionAnimation(this);
+                startActivity(new Intent(this, HelpActivity.class), op.toBundle());
                 break;
         }
         return super.onOptionsItemSelected(item);
