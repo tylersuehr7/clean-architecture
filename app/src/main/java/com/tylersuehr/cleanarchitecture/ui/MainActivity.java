@@ -17,6 +17,7 @@ import com.tylersuehr.cleanarchitecture.tasks.FindAllTask;
 import com.tylersuehr.cleanarchitecture.tasks.ITask;
 import com.tylersuehr.cleanarchitecture.tasks.TaskExecutor;
 import com.tylersuehr.cleanarchitecture.ui.adapters.PlaceholderItemAdapter;
+import com.tylersuehr.cleanarchitecture.ui.utils.SlideInItemAnimator;
 import com.tylersuehr.cleanarchitecture.ui.utils.TestingUtils;
 import com.tylersuehr.cleanarchitecture.ui.views.CardSpacer;
 import java.util.Collection;
@@ -34,8 +35,9 @@ public class MainActivity extends BaseActivity implements ITask {
         // Setup recycler
         adapter = new PlaceholderItemAdapter();
         RecyclerView recycler = (RecyclerView)findViewById(R.id.recycler);
-        recycler.setAdapter(adapter);
+        recycler.setItemAnimator(new SlideInItemAnimator());
         recycler.addItemDecoration(new CardSpacer());
+        recycler.setAdapter(adapter);
         adapter.setDelegate(recycler);
         manager = RepositoryManager.getInstance(this);
     }
