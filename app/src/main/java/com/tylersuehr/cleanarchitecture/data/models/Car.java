@@ -5,15 +5,24 @@ import java.util.UUID;
  * Copyright 2016 Tyler Suehr
  * Created by tyler on 12/25/2016.
  */
-public class Phone extends Entity {
+public class Car extends Entity {
+    private boolean used = false;
     private String make;
     private String model;
-    private double price;
-    private String carrier;
+    private String color;
+    private int year;
 
 
-    public Phone() {
+    public Car() {
         setId(UUID.randomUUID()); // Ensure unique id
+    }
+
+    public boolean isUsed() {
+        return used;
+    }
+
+    public void setUsed(boolean used) {
+        this.used = used;
     }
 
     public String getMake() {
@@ -32,19 +41,19 @@ public class Phone extends Entity {
         this.model = model;
     }
 
-    public double getPrice() {
-        return price;
+    public String getColor() {
+        return color;
     }
 
-    public void setPrice(double price) {
-        this.price = price;
+    public void setColor(String color) {
+        this.color = color;
     }
 
-    public String getCarrier() {
-        return carrier;
+    public int getYear() {
+        return year;
     }
 
-    public void setCarrier(String carrier) {
-        this.carrier = carrier;
+    public void setYear(int year) {
+        this.year = year;
     }
 }

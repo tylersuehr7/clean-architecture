@@ -1,4 +1,5 @@
 package com.tylersuehr.cleanarchitecture.ui;
+
 import android.annotation.TargetApi;
 import android.os.Build;
 import android.os.Bundle;
@@ -11,7 +12,9 @@ import android.text.TextUtils;
 import android.text.method.LinkMovementMethod;
 import android.transition.TransitionInflater;
 import android.widget.TextView;
+
 import com.tylersuehr.cleanarchitecture.R;
+import com.tylersuehr.cleanarchitecture.ui.BaseActivity;
 import com.tylersuehr.cleanarchitecture.ui.adapters.HelpAdapter;
 import com.tylersuehr.cleanarchitecture.ui.models.HelpHeader;
 import com.tylersuehr.cleanarchitecture.ui.models.HelpItem;
@@ -56,7 +59,7 @@ public class HelpActivity extends BaseActivity {
                 // If we drag dismiss downward then the default reversal of the enter
                 // transition would slide content upward which looks weird. So reverse it.
                 if (dragFrame.getTranslationY() > 0) {
-                    getWindow().setReturnTransition(TransitionInflater.from(HelpActivity.this)
+                    getWindow().setReturnTransition(TransitionInflater.from(com.tylersuehr.cleanarchitecture.ui.HelpActivity.this)
                             .inflateTransition(R.transition.about_return_down));
                 }
                 finishAfterTransition();

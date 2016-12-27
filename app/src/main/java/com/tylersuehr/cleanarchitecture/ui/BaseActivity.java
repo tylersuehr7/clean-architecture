@@ -1,4 +1,5 @@
 package com.tylersuehr.cleanarchitecture.ui;
+
 import android.os.Build;
 import android.support.annotation.TransitionRes;
 import android.support.design.widget.Snackbar;
@@ -6,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.transition.Transition;
 import android.transition.TransitionInflater;
 import android.view.View;
+
 import com.tylersuehr.cleanarchitecture.R;
 /**
  * Copyright 2016 Tyler Suehr

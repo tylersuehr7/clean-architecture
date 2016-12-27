@@ -2,37 +2,26 @@ package com.tylersuehr.cleanarchitecture.data.models;
 import java.util.UUID;
 /**
  * Copyright 2016 Tyler Suehr
- * Created by tyler on 8/28/2016.
+ * Created by tyler on 12/25/2016.
  *
- * This is the base class for all of our models that we want
- * to store in some kind of database.
- *
- * NOTE: All of our models will have a UUID for its primary key in
- *       its table.
+ * This is the base object for any thing that we wish to persist in our repository system.
  */
 public class Entity {
-    protected UUID id;
+    private Object id; // Use an object so that we can have any kind of id that we want
 
 
-    public Entity() {
-        this.id = UUID.randomUUID();
+    public Entity() {}
+
+    public String toQuery() {
+        return (id instanceof String || id instanceof UUID)
+                ? "[id]='" + id.toString() + "'" : "[id]=" + id;
     }
 
-    @Override
-    public String toString() {
-        // Return SQL query for convenience
-        return "[id]='" + id.toString() + "'";
-    }
-
-    public UUID getId() {
+    public Object getId() {
         return id;
     }
 
-    public void setId(UUID id) {
+    public void setId(Object id) {
         this.id = id;
-    }
-
-    public void setId(String id) {
-        this.id = UUID.fromString(id);
     }
 }

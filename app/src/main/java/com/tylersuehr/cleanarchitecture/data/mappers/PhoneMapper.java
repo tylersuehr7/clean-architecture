@@ -1,29 +1,41 @@
 package com.tylersuehr.cleanarchitecture.data.mappers;
+
 import android.content.ContentValues;
 import android.database.Cursor;
+
 import com.tylersuehr.cleanarchitecture.data.models.Phone;
+
+import java.util.UUID;
+
+import static com.tylersuehr.cleanarchitecture.data.repositories.DatabaseContract.Phones.COL_CARRIER;
+import static com.tylersuehr.cleanarchitecture.data.repositories.DatabaseContract.Phones.COL_ID;
+import static com.tylersuehr.cleanarchitecture.data.repositories.DatabaseContract.Phones.COL_MAKE;
+import static com.tylersuehr.cleanarchitecture.data.repositories.DatabaseContract.Phones.COL_MODEL;
+import static com.tylersuehr.cleanarchitecture.data.repositories.DatabaseContract.Phones.COL_PRICE;
 /**
  * Copyright 2016 Tyler Suehr
- * Created by tyler on 8/28/2016.
+ * Created by tyler on 12/25/2016.
  */
-public class PhoneMapper extends TechnologyMapper<Phone> {
+public class PhoneMapper implements IEntityMapper<Phone> {
     @Override
     public Phone map(Cursor c) {
         Phone phone = new Phone();
-        phone.setTechnology(mapTechnology(c));
-        String[] providers = c.getString(c.getColumnIndex("providers")).split(",");
-        for (String p : providers) {
-            phone.addEligibleProvider(p);
-        }
+        phone.setId(UUID.fromString(c.getString(c.getColumnIndex(COL_ID))));
+        phone.setMake(c.getString(c.getColumnIndex(COL_MAKE)));
+        phone.setModel(c.getString(c.getColumnIndex(COL_MODEL)));
+        phone.setCarrier(c.getString(c.getColumnIndex(COL_CARRIER)));
+        phone.setPrice(c.getDouble(c.getColumnIndex(COL_PRICE)));
         return phone;
     }
 
     @Override
-    public ContentValues toContentValues(Phone p) {
-        ContentValues values = super.toContentValues(p);
-        values.put("providers", p.getEligibleProviders().toString()
-                .replace("[", "").replace("]", ""));
+    public ContentValues toContentValues(Phone entity) {
+        ContentValues values = new ContentValues();
+        values.put(COL_ID, entity.getId().toString());
+        values.put(COL_MAKE, entity.getMake());
+        values.put(COL_MODEL, entity.getModel());
+        values.put(COL_CARRIER, entity.getCarrier());
+        values.put(COL_PRICE, entity.getPrice());
         return values;
     }
-
 }

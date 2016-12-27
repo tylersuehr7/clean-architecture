@@ -1,71 +1,79 @@
 package com.tylersuehr.cleanarchitecture.ui;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityOptionsCompat;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import com.tylersuehr.cleanarchitecture.R;
-import com.tylersuehr.cleanarchitecture.data.models.Phone;
-import com.tylersuehr.cleanarchitecture.data.models.Tablet;
-import com.tylersuehr.cleanarchitecture.data.models.User;
-import com.tylersuehr.cleanarchitecture.data.models.Watch;
-import com.tylersuehr.cleanarchitecture.data.repository.RepositoryManager;
-import com.tylersuehr.cleanarchitecture.tasks.FindAllTask;
-import com.tylersuehr.cleanarchitecture.tasks.ITask;
-import com.tylersuehr.cleanarchitecture.tasks.TaskExecutor;
-import com.tylersuehr.cleanarchitecture.ui.adapters.PlaceholderItemAdapter;
-import com.tylersuehr.cleanarchitecture.ui.utils.SlideInItemAnimator;
-import com.tylersuehr.cleanarchitecture.ui.utils.TestingUtils;
-import com.tylersuehr.cleanarchitecture.ui.views.CardSpacer;
-import java.util.Collection;
+import android.widget.Toast;
 
-public class MainActivity extends BaseActivity implements ITask {
-    private PlaceholderItemAdapter adapter;
-    private RepositoryManager manager;
+import com.tylersuehr.cleanarchitecture.R;
+import com.tylersuehr.cleanarchitecture.data.models.Car;
+import com.tylersuehr.cleanarchitecture.data.models.Entity;
+import com.tylersuehr.cleanarchitecture.data.models.Phone;
+import com.tylersuehr.cleanarchitecture.data.models.User;
+import com.tylersuehr.cleanarchitecture.data.repositories.RepositoryFactory;
+import com.tylersuehr.cleanarchitecture.domain.tasks.AddCarTask;
+import com.tylersuehr.cleanarchitecture.domain.tasks.AddPhoneTask;
+import com.tylersuehr.cleanarchitecture.domain.tasks.AddUserTask;
+import com.tylersuehr.cleanarchitecture.domain.tasks.ClearAllTask;
+import com.tylersuehr.cleanarchitecture.domain.tasks.LoadAllTask;
+import com.tylersuehr.cleanarchitecture.ui.HelpActivity;
+import com.tylersuehr.cleanarchitecture.ui.adapters.ItemAdapter;
+import com.tylersuehr.cleanarchitecture.ui.presenters.MainPresenter;
+import com.tylersuehr.cleanarchitecture.ui.utils.SlideInItemAnimator;
+import com.tylersuehr.cleanarchitecture.ui.utils.TestUtils;
+import com.tylersuehr.cleanarchitecture.ui.views.CardSpacer;
+
+import java.util.List;
+/**
+ * Copyright 2016 Tyler Suehr
+ * Created by tyler on 12/25/2016.
+ */
+public class MainActivity extends AppCompatActivity implements MainPresenter.View {
+    private MainPresenter presenter;
+    private ItemAdapter adapter;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        setTheme(R.style.AppTheme);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
         // Setup recycler
-        adapter = new PlaceholderItemAdapter();
+        adapter = new ItemAdapter();
         RecyclerView recycler = (RecyclerView)findViewById(R.id.recycler);
-        recycler.setItemAnimator(new SlideInItemAnimator());
         recycler.addItemDecoration(new CardSpacer());
+        recycler.setItemAnimator(new SlideInItemAnimator());
+        recycler.setLayoutManager(new LinearLayoutManager(this));
         recycler.setAdapter(adapter);
         adapter.setDelegate(recycler);
-        manager = RepositoryManager.getInstance(this);
+
+        // Setup presenter
+        LoadAllTask loadAllTask = new LoadAllTask(
+                RepositoryFactory.getUsers(this),
+                RepositoryFactory.getPhones(this),
+                RepositoryFactory.getCars(this));
+        ClearAllTask clearAllTask = new ClearAllTask(
+                RepositoryFactory.getUsers(this),
+                RepositoryFactory.getPhones(this),
+                RepositoryFactory.getCars(this));
+        presenter = new MainPresenter(this, loadAllTask,
+                new AddUserTask(RepositoryFactory.getUsers(this)),
+                new AddPhoneTask(RepositoryFactory.getPhones(this)),
+                new AddCarTask(RepositoryFactory.getCars(this)),
+                clearAllTask);
     }
 
     @Override
     protected void onStart() {
         super.onStart();
-
-        // Register our activity for task callbacks
-        TaskExecutor.register(this);
-
-        // Load all data from our database
-        TaskExecutor.execute(new FindAllTask(manager, this));
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-
-        // Unregister our activity for task callbacks
-        TaskExecutor.unregister(this);
-    }
-
-    @Override
-    public void onTaskCompleted(Collection<Object> objects) {
-        // Add all the items loaded into our recycler adapter
-        adapter.addAll(objects);
+        presenter.onStart();
     }
 
     @Override
@@ -80,43 +88,33 @@ public class MainActivity extends BaseActivity implements ITask {
         switch (item.getItemId()) {
             case R.id.action_user:
                 // Add a test user
-                User user = TestingUtils.createTestUser();
+                User user = TestUtils.createUser();
                 adapter.add(user);
-                manager.getUsers().add(user);
+                presenter.addTestUser(user);
                 break;
             case R.id.action_phone:
                 // Add a test phone
-                Phone phone = TestingUtils.createTestPhone(this);
+                Phone phone = TestUtils.createPhone();
                 adapter.add(phone);
-                manager.getPhones().add(phone);
+                presenter.addTestPhone(phone);
                 break;
-            case R.id.action_tablet:
+            case R.id.action_car:
                 // Add a test tablet
-                Tablet tablet = TestingUtils.createTestTablet(this);
-                adapter.add(tablet);
-                manager.getTablets().add(tablet);
-                break;
-            case R.id.action_watch:
-                // Add a test watch
-                Watch watch = TestingUtils.createTestWatch(this);
-                adapter.add(watch);
-                manager.getWatches().add(watch);
+                Car car = TestUtils.createCar();
+                adapter.add(car);
+                presenter.addTestCar(car);
                 break;
             case R.id.action_clear:
                 // Ask to remove items. If confirmed, remove all items in database
-                Snackbar snack = longSnack("Are you sure you want to clear all items?");
-                snack.setAction("Delete", new View.OnClickListener() {
+                Snackbar conf = Snackbar.make(findViewById(R.id.root), "Are you sure?", Snackbar.LENGTH_LONG);
+                conf.setAction("Delete", new View.OnClickListener() {
                     @Override
-                    public void onClick(View view) {
-                        manager.getUsers().remove(null);
-                        manager.getPhones().remove(null);
-                        manager.getTablets().remove(null);
-                        manager.getWatches().remove(null);
+                    public void onClick(View v) {
                         adapter.clear();
-                        shortSnack("Items cleared!").show();
+                        presenter.clearAll();
                     }
                 });
-                snack.show();
+                conf.show();
                 break;
             case R.id.action_about:
                 // Open the help activity
@@ -125,5 +123,18 @@ public class MainActivity extends BaseActivity implements ITask {
                 break;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onDisplayEntities(List<Entity> entities, boolean refresh) {
+        if (refresh) {
+            adapter.clear();
+        }
+        adapter.add(entities);
+    }
+
+    @Override
+    public void onShowMessage(String msg) {
+        Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
     }
 }

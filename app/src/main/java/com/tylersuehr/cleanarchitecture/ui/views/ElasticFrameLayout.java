@@ -1,4 +1,5 @@
 package com.tylersuehr.cleanarchitecture.ui.views;
+
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Context;
@@ -14,7 +15,9 @@ import android.util.DisplayMetrics;
 import android.view.View;
 import android.view.animation.AnimationUtils;
 import android.widget.FrameLayout;
+
 import com.tylersuehr.cleanarchitecture.R;
+
 import java.util.ArrayList;
 import java.util.List;
 /**

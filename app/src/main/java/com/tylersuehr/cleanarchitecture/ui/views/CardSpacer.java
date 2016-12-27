@@ -1,7 +1,9 @@
 package com.tylersuehr.cleanarchitecture.ui.views;
+
 import android.graphics.Rect;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+
 import com.tylersuehr.cleanarchitecture.R;
 /**
  * Copyright 2016 Tyler Suehr

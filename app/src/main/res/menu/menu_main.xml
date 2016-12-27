@@ -11,12 +11,8 @@
         android:title="Add Phone"
         app:showAsAction="never"/>
     <item
-        android:id="@+id/action_tablet"
-        android:title="Add Tablet"
-        app:showAsAction="never"/>
-    <item
-        android:id="@+id/action_watch"
-        android:title="Add Watch"
+        android:id="@+id/action_car"
+        android:title="Add Car"
         app:showAsAction="never"/>
     <item
         android:id="@+id/action_clear"
