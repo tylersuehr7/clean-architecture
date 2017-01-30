@@ -8,3 +8,6 @@ The `data` package includes objects that allow us to use local data storage. Thi
 The `domain` package includes asynchronous tasks that can be used to execute requests on the repository, and is mainly all the business logic of the application.
 
 The `ui` package contains everything needed to display views and allow the user to interact with the application; it uses the MVP design pattern.
+
+## Visuals
+![Structure Diagram](https://github.com/tylersuehr7/rss-clean-architecture/blob/master/img_application_structure.jpg "Structure Diagram")
