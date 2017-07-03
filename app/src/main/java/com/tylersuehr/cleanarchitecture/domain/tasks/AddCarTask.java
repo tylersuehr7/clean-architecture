@@ -15,7 +15,7 @@ public class AddCarTask extends UseCase<Car, Car> {
     }
 
     @Override
-    protected void execute() {
+    protected void onExecute() {
         final Car car = getRequest();
         repo.add(car);
         getCallback().onSuccess(car);

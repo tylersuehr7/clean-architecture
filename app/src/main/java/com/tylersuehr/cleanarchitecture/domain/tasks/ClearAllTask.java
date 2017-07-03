@@ -21,7 +21,7 @@ public class ClearAllTask extends UseCase<Object, Object> {
     }
 
     @Override
-    protected void execute() {
+    protected void onExecute() {
         userRepo.remove(null);
         phoneRepo.remove(null);
         carRepo.remove(null);

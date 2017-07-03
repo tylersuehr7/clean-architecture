@@ -15,7 +15,7 @@ public class AddPhoneTask extends UseCase<Phone, Phone> {
     }
 
     @Override
-    protected void execute() {
+    protected void onExecute() {
         final Phone phone = getRequest();
         repo.add(phone);
         getCallback().onSuccess(phone);

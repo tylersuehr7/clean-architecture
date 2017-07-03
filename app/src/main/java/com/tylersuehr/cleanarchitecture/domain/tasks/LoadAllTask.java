@@ -26,7 +26,7 @@ public class LoadAllTask extends UseCase<Object, List<Entity>> {
     }
 
     @Override
-    protected void execute() {
+    protected void onExecute() {
         List<Entity> entities = new LinkedList<>();
 
         collectUsers(entities);

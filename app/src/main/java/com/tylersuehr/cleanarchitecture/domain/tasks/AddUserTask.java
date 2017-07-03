@@ -15,7 +15,7 @@ public class AddUserTask extends UseCase<User, User> {
     }
 
     @Override
-    protected void execute() {
+    protected void onExecute() {
         final User user = getRequest();
         repo.add(user);
         getCallback().onSuccess(user);
