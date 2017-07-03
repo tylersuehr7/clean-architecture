@@ -1,20 +1,29 @@
 package com.tylersuehr.cleanarchitecture.data.models;
-import java.util.UUID;
+
 /**
- * Copyright 2016 Tyler Suehr
- * Created by tyler on 12/25/2016.
+ * Copyright 2017 Tyler Suehr
+ * Created by tyler on 7/3/2017.
  *
- * This is the base object for any thing that we wish to persist in our repository system.
+ * <b>Summary</b>
+ * The base model for anything we want to store in the SQLite database.
+ *
+ * {@link #equals(Object)}: Overridden to check if the ids of the Entities match.
+ * {@link #toString()}: Overridden to display the Entity's id.
  */
 public class Entity {
-    private Object id; // Use an object so that we can have any kind of id that we want
+    private Object id;
 
 
     public Entity() {}
 
-    public String toQuery() {
-        return (id instanceof String || id instanceof UUID)
-                ? "[id]='" + id.toString() + "'" : "[id]=" + id;
+    @Override
+    public boolean equals(Object obj) {
+        return (this == obj) || (obj instanceof Entity && ((Entity)obj).id.equals(id));
+    }
+
+    @Override
+    public String toString() {
+        return "Entity {'" + id + "'}";
     }
 
     public Object getId() {
