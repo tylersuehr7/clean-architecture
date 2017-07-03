@@ -12,6 +12,10 @@ import static com.tylersuehr.cleanarchitecture.data.repositories.DatabaseContrac
  * This handles our local database management and allows us to interface with the
  * {@link SQLiteDatabase}.
  *
+ * <b>Important</b>
+ * We use a singleton so that we prevent creating multiple instances of {@link SQLiteDatabase}
+ * and causing a memory leakage.
+ *
  * NOTE: We decouple this object by using {@link IDatabaseClient} to provide access to the
  * database.
  */
