@@ -48,11 +48,8 @@ public class PeopleActivity extends AppCompatActivity implements PeoplePresenter
                 new AllPeopleTask(personRepo),
                 new SavePersonTask(personRepo),
                 new DeleteAllPeopleTask(personRepo));
-    }
 
-    @Override
-    protected void onStart() {
-        super.onStart();
+        // Load all the existing people
         this.presenter.loadAllPeople();
     }
 

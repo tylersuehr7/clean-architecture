@@ -9,15 +9,12 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".ui.MainActivity"
-            android:theme="@style/AppTheme.Launcher">
+            android:name=".ui.a_people.PeopleActivity"
+            android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity
-            android:name=".ui.HelpActivity"
-            android:theme="@style/AppTheme.Help"/>
     </application>
 </manifest>
