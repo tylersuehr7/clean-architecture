@@ -11,7 +11,6 @@ import static com.tylersuehr.cleanarchitecture.data.repositories.DatabaseContrac
  * Copyright 2017 Tyler Suehr
  * Created by tyler on 7/3/2017.
  *
- * <b>Summary</b>
  * This manages the local data source for {@link IPersonRepository}.
  */
 public class LocalPersonRepository implements IPersonRepository {

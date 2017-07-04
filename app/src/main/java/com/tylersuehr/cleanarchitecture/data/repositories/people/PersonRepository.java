@@ -10,7 +10,6 @@ import java.util.Map;
  * Copyright 2017 Tyler Suehr
  * Created by tyler on 7/3/2017.
  *
- * <b>Summary</b>
  * This manages all data sources for {@link IPersonRepository}.
  *
  * NOTE: We also utilize a basic caching system here too.
