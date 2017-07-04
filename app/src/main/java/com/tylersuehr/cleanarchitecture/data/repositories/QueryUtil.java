@@ -1,7 +1,6 @@
 package com.tylersuehr.cleanarchitecture.data.repositories;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.util.Log;
 import com.tylersuehr.cleanarchitecture.data.exceptions.EmptyQueryException;
 import com.tylersuehr.cleanarchitecture.data.exceptions.QueryException;
 import com.tylersuehr.cleanarchitecture.data.mappers.IEntityMapper;
@@ -78,6 +77,44 @@ public final class QueryUtil {
             } else {
                 callback.onListLoaded(objects);
             }
+        } catch (Exception ex) {
+            callback.onNotAvailable(new QueryException(table, ex));
+        } finally {
+            if (c != null) { c.close(); }
+        }
+    }
+
+    /**
+     * Queries the SQLite database for multiple objects. Does not callback with fail if results
+     * are empty.
+     * @param db {@link SQLiteDatabase}
+     * @param mapper {@link IEntityMapper}
+     * @param table Table name
+     * @param where Where clause
+     * @param order OrderBy clause
+     * @param limit Limit clause
+     * @param callback {@link ListCallback}
+     */
+    public static <T extends Entity> void queryForEmpty(
+            SQLiteDatabase db,
+            IEntityMapper<T> mapper,
+            String table,
+            String where,
+            String order,
+            String limit,
+            ListCallback<T> callback) {
+        Cursor c = null;
+        try {
+            c = db.query(table, null, where, null, null, null, null);
+            c.moveToFirst();
+
+            List<T> objects = new ArrayList<>(c.getCount());
+            for (int i = 0; i < c.getCount(); i++) {
+                objects.add(mapper.map(c));
+                c.moveToNext();
+            }
+
+            callback.onListLoaded(objects);
         } catch (Exception ex) {
             callback.onNotAvailable(new QueryException(table, ex));
         } finally {
