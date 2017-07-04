@@ -1,6 +1,7 @@
 package com.tylersuehr.cleanarchitecture.ui.a_people;
 import android.content.res.Resources;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,6 +27,7 @@ class PersonAdapter extends BaseAdapter<Person, PersonAdapter.Holder> {
     public void onBindViewHolder(Holder holder, int position) {
         Person person = get(position);
         holder.title.setText(person.getFirstName() + " "+ person.getLastName());
+        holder.age.setText(TextUtils.concat("Age ", String.valueOf(person.getAge())));
 
         final Resources res = holder.image.getResources();
         Picasso.with(holder.image.getContext())
@@ -35,11 +37,12 @@ class PersonAdapter extends BaseAdapter<Person, PersonAdapter.Holder> {
 
     static class Holder extends RecyclerView.ViewHolder {
         CircleImageView image;
-        TextView title;
+        TextView title, age;
 
         Holder(View v) {
             super(v);
             this.title = (TextView)v.findViewById(R.id.title);
+            this.age = (TextView)v.findViewById(R.id.age);
             this.image = (CircleImageView)v.findViewById(R.id.image);
         }
     }
