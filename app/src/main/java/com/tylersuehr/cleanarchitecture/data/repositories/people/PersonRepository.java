@@ -43,7 +43,7 @@ public final class PersonRepository implements IPersonRepository {
     @Override
     public void deletePerson(Person person) {
         this.local.deletePerson(person);
-        if (cache != null) {
+        if (cache != null && person != null) {
             this.cache.remove(person.getId());
         }
     }

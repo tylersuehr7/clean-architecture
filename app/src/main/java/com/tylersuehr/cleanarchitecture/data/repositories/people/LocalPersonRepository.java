@@ -42,7 +42,7 @@ public class LocalPersonRepository implements IPersonRepository {
 
     @Override
     public void findAllPeople(ListCallback<Person> callback) {
-        QueryUtil.query(db, mapper, People.NAME, null, null, null, callback);
+        QueryUtil.queryForEmpty(db, mapper, People.NAME, null, null, null, callback);
     }
 
     @Override

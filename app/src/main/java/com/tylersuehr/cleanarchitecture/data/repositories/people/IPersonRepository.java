@@ -1,4 +1,5 @@
 package com.tylersuehr.cleanarchitecture.data.repositories.people;
+import android.support.annotation.Nullable;
 import com.tylersuehr.cleanarchitecture.data.models.Person;
 import com.tylersuehr.cleanarchitecture.data.repositories.ListCallback;
 import com.tylersuehr.cleanarchitecture.data.repositories.SingleCallback;
@@ -8,7 +9,7 @@ import com.tylersuehr.cleanarchitecture.data.repositories.SingleCallback;
  */
 public interface IPersonRepository {
     void savePerson(Person person);
-    void deletePerson(Person person);
+    void deletePerson(@Nullable Person person);
     void findAllPeople(ListCallback<Person> callback);
     void findPersonById(String personId, SingleCallback<Person> callback);
 }
