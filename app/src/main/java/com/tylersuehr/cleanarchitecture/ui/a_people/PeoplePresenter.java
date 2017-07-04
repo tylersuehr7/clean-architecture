@@ -6,7 +6,7 @@ import com.tylersuehr.cleanarchitecture.domain.people.AllPeopleTask;
 import com.tylersuehr.cleanarchitecture.domain.people.DeleteAllPeopleTask;
 import com.tylersuehr.cleanarchitecture.domain.people.SavePersonTask;
 import com.tylersuehr.cleanarchitecture.ui.shared.Mock;
-import com.tylersuehr.cleanarchitecture.ui.Presenter;
+import com.tylersuehr.cleanarchitecture.ui.BasePresenter;
 import java.util.List;
 /**
  * Copyright 2017 Tyler Suehr
@@ -14,7 +14,7 @@ import java.util.List;
  *
  * View: {@link PeopleActivity}
  */
-class PeoplePresenter extends Presenter<PeoplePresenter.PeopleView> {
+class PeoplePresenter extends BasePresenter<PeoplePresenter.PeopleView> {
     private final AllPeopleTask allPeopleTask;
     private final SavePersonTask savePersonTask;
     private final DeleteAllPeopleTask deleteAllPeopleTask;

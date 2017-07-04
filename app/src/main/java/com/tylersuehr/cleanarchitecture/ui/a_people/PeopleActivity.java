@@ -3,7 +3,6 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -17,11 +16,29 @@ import com.tylersuehr.cleanarchitecture.domain.people.DeleteAllPeopleTask;
 import com.tylersuehr.cleanarchitecture.domain.people.SavePersonTask;
 import com.tylersuehr.cleanarchitecture.ui.shared.SlideInItemAnimator;
 import com.tylersuehr.cleanarchitecture.ui.views.EmptyStateRecyclerView;
-
 import java.util.List;
 /**
  * Copyright 2017 Tyler Suehr
  * Created by tyler on 7/3/2017.
+ *
+ * <b>Summary</b>
+ * This activity will allow the user to see a list of all the people they've added and will also
+ * allow them to manage this list (using basic add and clear).
+ *
+ * <b>How It Works</b>
+ * We utilize {@link #onCreate(Bundle)} to setup our UI and presenter.
+ *
+ * So, to load the list of people, we also utilize the {@link PeoplePresenter} and use it to load
+ * people from the {@link #onCreate(Bundle)} method. This runs asynchronously and, when completed,
+ * will callback with all the people in {@link #onPeopleReady(List)}.
+ *
+ * <b>Important</b>
+ * In a real production application, we would want to manage the lifecycle a little better by
+ * ensuring that when the device is rotated, and the current activity is destroyed, that we clean
+ * up any on-going threads loading data for the previous activity, or use those on-going threads
+ * to callback on the newly created activity.
+ *
+ * This is outside the scope of this example though, and we have the orientation set to portrait.
  *
  * Presenter: {@link PeoplePresenter}
  */

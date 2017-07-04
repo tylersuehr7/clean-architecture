@@ -12,6 +12,9 @@ import com.tylersuehr.cleanarchitecture.R;
 /**
  * Copyright 2017 Tyler Suehr
  * Created by tyler on 7/4/2017.
+ *
+ * This is a simple Bottom Sheet dialog to allow the user to input a first name, last name, and
+ * age, and will callback with the inputted data using {@link PersonDialogListener}.
  */
 public class PersonBottomSheet extends BottomSheetDialogFragment implements View.OnClickListener {
     private AppCompatEditText inputFirst;
@@ -69,7 +72,7 @@ public class PersonBottomSheet extends BottomSheetDialogFragment implements View
     }
 
     /**
-     * Callbacks for this dialog.
+     * Callback for this dialog.
      */
     interface PersonDialogListener {
         void onPersonAdded(String first, String last, int age);
