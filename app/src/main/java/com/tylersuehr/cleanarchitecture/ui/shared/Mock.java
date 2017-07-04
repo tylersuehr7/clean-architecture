@@ -1,4 +1,4 @@
-package com.tylersuehr.cleanarchitecture.ui;
+package com.tylersuehr.cleanarchitecture.ui.shared;
 import java.util.Random;
 /**
  * Copyright 2017 Tyler Suehr
