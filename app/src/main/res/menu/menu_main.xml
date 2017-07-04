@@ -3,20 +3,12 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:id="@+id/action_user"
-        android:title="Add User"
-        app:showAsAction="never"/>
-    <item
-        android:id="@+id/action_phone"
-        android:title="Add Phone"
-        app:showAsAction="never"/>
-    <item
-        android:id="@+id/action_car"
-        android:title="Add Car"
+        android:id="@+id/action_add"
+        android:title="Add Person"
         app:showAsAction="never"/>
     <item
         android:id="@+id/action_clear"
-        android:title="Clear All Items"
+        android:title="Clear All"
         app:showAsAction="never"/>
     <item
         android:id="@+id/action_about"
