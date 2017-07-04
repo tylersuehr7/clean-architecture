@@ -31,8 +31,13 @@ public class LocalPersonRepository implements IPersonRepository {
 
     @Override
     public void deletePerson(Person person) {
-        String where = People.COL_ID + "='" + person.getId() + "'";
-        this.db.delete(People.NAME, where, null);
+        if (person == null) {
+            // Delete all rows in table
+            this.db.delete(People.NAME, null, null);
+        } else {
+            String where = People.COL_ID + "='" + person.getId() + "'";
+            this.db.delete(People.NAME, where, null);
+        }
     }
 
     @Override
