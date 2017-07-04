@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="@dimen/padding_large">
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/padding_large"
+        android:textSize="@dimen/text_h3"
+        android:textColor="@color/grey.600"
+        android:text="Add a Person"/>
+    <android.support.v7.widget.AppCompatEditText
+        android:id="@+id/input_first"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="text|textCapWords"
+        android:imeOptions="actionNext"
+        android:hint="First name..."/>
+    <android.support.v7.widget.AppCompatEditText
+        android:id="@+id/input_last"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="text|textCapWords"
+        android:imeOptions="actionNext"
+        android:hint="Last name..."/>
+    <android.support.v7.widget.AppCompatEditText
+        android:id="@+id/input_age"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="number"
+        android:imeOptions="actionDone"
+        android:hint="Age..."/>
+    <Button
+        android:id="@+id/button_create"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/padding_xlarge"
+        android:text="Create Person"/>
+</LinearLayout>
