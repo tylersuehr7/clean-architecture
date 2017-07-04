@@ -1,4 +1,4 @@
-package com.tylersuehr.cleanarchitecture.ui.utils;
+package com.tylersuehr.cleanarchitecture.ui.shared;
 import android.text.Layout;
 import android.text.SpannableString;
 import android.text.Spanned;

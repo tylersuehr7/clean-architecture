@@ -1,4 +1,4 @@
-package com.tylersuehr.cleanarchitecture.ui.utils;
+package com.tylersuehr.cleanarchitecture.ui.shared;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
