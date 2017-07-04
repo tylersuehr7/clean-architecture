@@ -6,6 +6,8 @@ import static com.tylersuehr.cleanarchitecture.data.repositories.DatabaseContrac
 /**
  * Copyright 2017 Tyler Suehr
  * Created by tyler on 7/3/2017.
+ *
+ * Concrete implementation of {@link IEntityMapper} for {@link Person} model.
  */
 public class PersonMapper implements IEntityMapper<Person> {
     @Override

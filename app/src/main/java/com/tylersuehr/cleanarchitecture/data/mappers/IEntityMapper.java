@@ -6,7 +6,6 @@ import com.tylersuehr.cleanarchitecture.data.models.Entity;
  * Copyright 2017 Tyler Suehr
  * Created by tyler on 7/3/2017.
  *
- * <b>Summary</b>
  * We encapsulate the mapping logic for our models for the SQLite database.
  */
 public interface IEntityMapper<T extends Entity> {
