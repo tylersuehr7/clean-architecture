@@ -1,5 +1,5 @@
 package com.tylersuehr.cleanarchitecture.domain;
-
+import android.util.Log;
 /**
  * Copyright 2017 Tyler Suehr
  * Created by tyler on 7/3/2017.
@@ -18,6 +18,10 @@ public abstract class UseCase<T, V> {
     public UseCase() {}
 
     protected abstract void onExecute();
+
+    protected void logFail(Exception ex) {
+        Log.wtf("USE_CASE", ex);
+    }
 
     public UseCaseCallback<V> getCallback() {
         return callback;
