@@ -1,4 +1,4 @@
-package com.tylersuehr.cleanarchitecture.ui.a_people;
+package com.tylersuehr.cleanarchitecture.ui.people;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -15,7 +15,7 @@ import com.tylersuehr.cleanarchitecture.domain.people.AllPeopleTask;
 import com.tylersuehr.cleanarchitecture.domain.people.DeleteAllPeopleTask;
 import com.tylersuehr.cleanarchitecture.domain.people.SavePersonTask;
 import com.tylersuehr.cleanarchitecture.ui.Navigator;
-import com.tylersuehr.cleanarchitecture.ui.a_about.AboutActivity;
+import com.tylersuehr.cleanarchitecture.ui.about.AboutActivity;
 import com.tylersuehr.cleanarchitecture.ui.shared.AlertUtils;
 import com.tylersuehr.cleanarchitecture.ui.views.EmptyStateRecyclerView;
 import java.util.List;

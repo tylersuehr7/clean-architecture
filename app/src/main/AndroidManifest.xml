@@ -9,7 +9,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".ui.a_people.PeopleActivity"
+            android:name=".ui.people.PeopleActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -18,7 +18,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.a_about.AboutActivity"
+            android:name=".ui.about.AboutActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.About"
             android:label=""/>

@@ -1,4 +1,4 @@
-package com.tylersuehr.cleanarchitecture.ui.a_people;
+package com.tylersuehr.cleanarchitecture.ui.people;
 import android.content.res.Resources;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;

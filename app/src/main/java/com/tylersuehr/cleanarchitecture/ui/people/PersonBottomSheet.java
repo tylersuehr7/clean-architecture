@@ -1,4 +1,4 @@
-package com.tylersuehr.cleanarchitecture.ui.a_people;
+package com.tylersuehr.cleanarchitecture.ui.people;
 import android.app.Dialog;
 import android.os.Bundle;
 import android.support.annotation.NonNull;

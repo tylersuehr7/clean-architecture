@@ -1,4 +1,4 @@
-package com.tylersuehr.cleanarchitecture.ui.a_people;
+package com.tylersuehr.cleanarchitecture.ui.people;
 import com.tylersuehr.cleanarchitecture.data.exceptions.EmptyQueryException;
 import com.tylersuehr.cleanarchitecture.data.models.Person;
 import com.tylersuehr.cleanarchitecture.domain.UseCaseCallback;

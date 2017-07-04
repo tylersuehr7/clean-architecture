@@ -1,4 +1,4 @@
-package com.tylersuehr.cleanarchitecture.ui.a_about;
+package com.tylersuehr.cleanarchitecture.ui.about;
 import android.annotation.TargetApi;
 import android.os.Build;
 import android.os.Bundle;

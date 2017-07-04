@@ -1,4 +1,4 @@
-package com.tylersuehr.cleanarchitecture.ui.a_people;
+package com.tylersuehr.cleanarchitecture.ui.people;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.content.Context;
