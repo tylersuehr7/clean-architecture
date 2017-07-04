@@ -14,6 +14,8 @@ import com.tylersuehr.cleanarchitecture.data.repositories.people.IPersonReposito
 import com.tylersuehr.cleanarchitecture.domain.people.AllPeopleTask;
 import com.tylersuehr.cleanarchitecture.domain.people.DeleteAllPeopleTask;
 import com.tylersuehr.cleanarchitecture.domain.people.SavePersonTask;
+import com.tylersuehr.cleanarchitecture.ui.Navigator;
+import com.tylersuehr.cleanarchitecture.ui.a_about.AboutActivity;
 import com.tylersuehr.cleanarchitecture.ui.shared.SlideInItemAnimator;
 import com.tylersuehr.cleanarchitecture.ui.views.EmptyStateRecyclerView;
 import java.util.List;
@@ -96,6 +98,7 @@ public class PeopleActivity extends AppCompatActivity implements PeoplePresenter
                 this.presenter.clearPeople();
                 break;
             case R.id.action_about:
+                Navigator.from(this).to(AboutActivity.class).go();
                 break;
         }
         return super.onOptionsItemSelected(item);
