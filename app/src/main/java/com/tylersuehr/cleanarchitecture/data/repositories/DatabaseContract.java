@@ -3,6 +3,8 @@ package com.tylersuehr.cleanarchitecture.data.repositories;
 /**
  * Copyright 2017 Tyler Suehr
  * Created by tyler on 7/3/2017.
+ *
+ * Concretely defines the structure of our local database tables.
  */
 public final class DatabaseContract {
     public static abstract class People {

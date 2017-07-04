@@ -11,7 +11,6 @@ import java.util.List;
  * Copyright 2017 Tyler Suehr
  * Created by tyler on 7/3/2017.
  *
- * <b>Summary</b>
  * Basic utility to help with querying the local SQLite database.
  */
 public final class QueryUtil {
