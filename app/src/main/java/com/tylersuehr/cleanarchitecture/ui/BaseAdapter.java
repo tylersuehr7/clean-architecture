@@ -7,8 +7,7 @@ import java.util.List;
  * Copyright 2017 Tyler Suehr
  * Created by tyler on 7/3/2017.
  *
- * <b>Summary</b>
- * Just a simple adapter to store a list of items.
+ * Just a simple RecyclerView adapter that manages a list of items.
  */
 public abstract class BaseAdapter<T, VH extends RecyclerView.ViewHolder> extends RecyclerView.Adapter<VH> {
     private final List<T> items;
