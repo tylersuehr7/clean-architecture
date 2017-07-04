@@ -17,5 +17,10 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
+        <activity
+            android:name=".ui.a_about.AboutActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.About"
+            android:label=""/>
     </application>
 </manifest>

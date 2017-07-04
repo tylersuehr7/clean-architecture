@@ -26,17 +26,12 @@ public final class Navigator {
     }
 
     public void finish() {
-        this.activity.finish();
-    }
-
-    public void finishCompat() {
         ActivityCompat.finishAfterTransition(activity);
     }
 
 
     public interface INavResult {
         Navigator go();
-        Navigator goCompat();
     }
 
     private final class NavResultImpl implements INavResult {
@@ -48,13 +43,6 @@ public final class Navigator {
 
         @Override
         public Navigator go() {
-            activity.startActivity(intent);
-            return Navigator.this;
-        }
-
-        @Override
-        @SuppressWarnings("unchecked")
-        public Navigator goCompat() {
             ActivityOptionsCompat op = ActivityOptionsCompat.makeSceneTransitionAnimation(activity);
             activity.startActivity(intent, op.toBundle());
             return Navigator.this;

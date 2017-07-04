@@ -3,6 +3,7 @@
     <string name="app_name_enter">Clean\nArchitecture</string>
     <string name="about">
         <![CDATA[
+            <b>About this app</b><br/>
             The purpose of this app is to show how to architect a <i>clean</i>
             Android app that uses local SQLite database storage.
         ]]>
@@ -10,7 +11,8 @@
     <string name="about_dev">
         <![CDATA[
             App developed by <b>Tyler Suehr</b><br/>
-            Founder &amp; Sr. Architect Suehr Solutions<br/>
+            Founder &amp; Sr. Architect <i>Suehr Solutions</i><br/>
+            Software Architect &amp; Analyst <i>Someonew</i><br/>
             <a href="http://www.suehrsolutions.net">Website</a> |
             <a href="https://www.twitter.com/tylersuehr7">Twitter</a> |
             <a href="https://plus.google.com/u/0/+TylerSuehr/posts">Google+</a>

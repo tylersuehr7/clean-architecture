@@ -16,7 +16,7 @@ import com.tylersuehr.cleanarchitecture.domain.people.DeleteAllPeopleTask;
 import com.tylersuehr.cleanarchitecture.domain.people.SavePersonTask;
 import com.tylersuehr.cleanarchitecture.ui.Navigator;
 import com.tylersuehr.cleanarchitecture.ui.a_about.AboutActivity;
-import com.tylersuehr.cleanarchitecture.ui.shared.SlideInItemAnimator;
+import com.tylersuehr.cleanarchitecture.ui.shared.AlertUtils;
 import com.tylersuehr.cleanarchitecture.ui.views.EmptyStateRecyclerView;
 import java.util.List;
 /**
@@ -61,7 +61,7 @@ public class PeopleActivity extends AppCompatActivity implements PeoplePresenter
         // Setup the people list
         adapter = new PersonAdapter();
         EmptyStateRecyclerView recycler = (EmptyStateRecyclerView)findViewById(R.id.recycler);
-        recycler.setItemAnimator(new SlideInItemAnimator());
+        recycler.setItemAnimator(new SlideAnimator());
         recycler.setLayoutManager(new LinearLayoutManager(this));
         recycler.setAdapter(adapter);
 
@@ -94,8 +94,13 @@ public class PeopleActivity extends AppCompatActivity implements PeoplePresenter
                 });
                 break;
             case R.id.action_clear:
-                this.adapter.clear();
-                this.presenter.clearPeople();
+                AlertUtils.confirm(this, "Clear all people?", "YES", new Runnable() {
+                    @Override
+                    public void run() {
+                        adapter.clear();
+                        presenter.clearPeople();
+                    }
+                });
                 break;
             case R.id.action_about:
                 Navigator.from(this).to(AboutActivity.class).go();

@@ -1,4 +1,4 @@
-package com.tylersuehr.cleanarchitecture.ui.shared;
+package com.tylersuehr.cleanarchitecture.ui.a_people;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.content.Context;
@@ -12,22 +12,21 @@ import android.view.animation.Interpolator;
 import java.util.ArrayList;
 import java.util.List;
 /**
- * Copyright 2016 Tyler Suehr
- * Created by tyler on 8/15/2016.
+ * Copyright 2017 Tyler Suehr
+ * Created by tyler on 7/4/2017.
  *
- * An animator for RecyclerView that fades & slides newly added items
- * in from a given direction.
+ * An animator for RecyclerView that fades & slides newly added items from a given direction.
  */
-public class SlideInItemAnimator extends DefaultItemAnimator {
+class SlideAnimator extends DefaultItemAnimator {
     private final List<RecyclerView.ViewHolder> pendingAdds = new ArrayList<>();
     private final int slideFromEdge;
 
 
-    public SlideInItemAnimator() {
+    SlideAnimator() {
         this(Gravity.BOTTOM, -1);
     }
 
-    public SlideInItemAnimator(int slideFromEdge, int layoutDirection) {
+    SlideAnimator(int slideFromEdge, int layoutDirection) {
         this.slideFromEdge = Gravity.getAbsoluteGravity(slideFromEdge, layoutDirection);
         setAddDuration(160L);
     }
