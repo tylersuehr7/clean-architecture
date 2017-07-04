@@ -72,10 +72,9 @@ public final class QueryUtil {
             }
 
             if (objects.isEmpty()) {
-                callback.onNotAvailable(new EmptyQueryException(table));
-            } else {
-                callback.onListLoaded(objects);
+                throw new EmptyQueryException(table);
             }
+            callback.onListLoaded(objects);
         } catch (Exception ex) {
             callback.onNotAvailable(new QueryException(table, ex));
         } finally {
