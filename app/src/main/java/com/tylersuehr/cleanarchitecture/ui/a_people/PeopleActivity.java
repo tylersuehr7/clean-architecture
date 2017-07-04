@@ -16,7 +16,6 @@ import com.tylersuehr.cleanarchitecture.domain.people.AllPeopleTask;
 import com.tylersuehr.cleanarchitecture.domain.people.DeleteAllPeopleTask;
 import com.tylersuehr.cleanarchitecture.domain.people.SavePersonTask;
 import com.tylersuehr.cleanarchitecture.ui.shared.SlideInItemAnimator;
-
 import java.util.List;
 /**
  * Copyright 2017 Tyler Suehr
