@@ -15,6 +15,8 @@ import com.tylersuehr.cleanarchitecture.data.repositories.people.IPersonReposito
 import com.tylersuehr.cleanarchitecture.domain.people.AllPeopleTask;
 import com.tylersuehr.cleanarchitecture.domain.people.DeleteAllPeopleTask;
 import com.tylersuehr.cleanarchitecture.domain.people.SavePersonTask;
+import com.tylersuehr.cleanarchitecture.ui.shared.SlideInItemAnimator;
+
 import java.util.List;
 /**
  * Copyright 2017 Tyler Suehr
@@ -39,6 +41,7 @@ public class PeopleActivity extends AppCompatActivity implements PeoplePresenter
         // Setup the people list
         adapter = new PersonAdapter();
         RecyclerView recycler = (RecyclerView)findViewById(R.id.recycler);
+        recycler.setItemAnimator(new SlideInItemAnimator());
         recycler.setLayoutManager(new LinearLayoutManager(this));
         recycler.setAdapter(adapter);
 

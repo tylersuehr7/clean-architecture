@@ -16,7 +16,7 @@
         android:layout_marginRight="@dimen/padding_large"
         android:src="@drawable/img_profile_0"
         app:circleColor="@color/colorPrimary"
-        app:borderColor="@color/colorPrimary"/>
+        app:borderColor="@color/colorPrimaryDark"/>
     <TextView
         android:id="@+id/title"
         android:layout_width="match_parent"
