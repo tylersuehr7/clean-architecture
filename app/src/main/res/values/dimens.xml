@@ -1,10 +1,7 @@
 <resources>
+    <dimen name="padding_xlarge">24dp</dimen>
     <dimen name="padding_large">16dp</dimen>
     <dimen name="padding_small">8dp</dimen>
-    <dimen name="icon_size">40dp</dimen>
-    <dimen name="recycler_placeholder_size">100dp</dimen>
-    <dimen name="chip_corner_radius">32dp</dimen>
-    <dimen name="help_banner_height">230dp</dimen>
 
     <dimen name="text_h1">32sp</dimen>
     <dimen name="text_h2">28sp</dimen>

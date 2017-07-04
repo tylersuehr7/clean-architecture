@@ -4,8 +4,9 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
     </style>
-    <style name="AppTheme.Launcher">
-        <item name="android:windowBackground">@drawable/launcher</item>
+    
+    <style name="AppTheme.NoActionBar">
+        <item name="windowNoTitle">true</item>
+        <item name="windowActionBar">false</item>
     </style>
-    <style name="AppTheme.Help"/>
 </resources>
