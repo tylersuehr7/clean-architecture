@@ -63,7 +63,7 @@ public class PersonBottomSheet extends BottomSheetDialogFragment implements View
             }
 
             // Trigger callback and dismiss
-            listener.onPersonAdded(first, last, "img_profile_0", Integer.parseInt(age));
+            listener.onPersonAdded(first, last, Integer.parseInt(age));
             dismiss();
         }
     }
@@ -72,6 +72,6 @@ public class PersonBottomSheet extends BottomSheetDialogFragment implements View
      * Callbacks for this dialog.
      */
     interface PersonDialogListener {
-        void onPersonAdded(String first, String last, String image, int age);
+        void onPersonAdded(String first, String last, int age);
     }
 }

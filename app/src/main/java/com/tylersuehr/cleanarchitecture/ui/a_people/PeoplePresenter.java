@@ -5,6 +5,7 @@ import com.tylersuehr.cleanarchitecture.domain.UseCaseCallback;
 import com.tylersuehr.cleanarchitecture.domain.people.AllPeopleTask;
 import com.tylersuehr.cleanarchitecture.domain.people.DeleteAllPeopleTask;
 import com.tylersuehr.cleanarchitecture.domain.people.SavePersonTask;
+import com.tylersuehr.cleanarchitecture.ui.Mock;
 import com.tylersuehr.cleanarchitecture.ui.Presenter;
 import java.util.List;
 /**
@@ -49,11 +50,10 @@ class PeoplePresenter extends Presenter<PeoplePresenter.PeopleView> {
      * Saves a person in the repository.
      * @param first First name
      * @param last Last name
-     * @param image Image for the person
      * @param age Age
      */
-    void savePerson(String first, String last, String image, int age) {
-        SavePersonTask.Request request = new SavePersonTask.Request(first, last, image, age);
+    void savePerson(String first, String last, int age) {
+        SavePersonTask.Request request = new SavePersonTask.Request(first, last, Mock.randomImage(), age);
         scheduler.execute(savePersonTask, request, new UseCaseCallback<Person>() {
             @Override
             public void onSuccess(Person response) {

@@ -65,8 +65,8 @@ public class PeopleActivity extends AppCompatActivity implements PeoplePresenter
             case R.id.action_add:
                 PersonBottomSheet.show(getSupportFragmentManager(), new PersonBottomSheet.PersonDialogListener() {
                     @Override
-                    public void onPersonAdded(String first, String last, String image, int age) {
-                        presenter.savePerson(first, last, image, age);
+                    public void onPersonAdded(String first, String last, int age) {
+                        presenter.savePerson(first, last, age);
                     }
                 });
                 break;
