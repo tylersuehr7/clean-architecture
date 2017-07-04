@@ -6,7 +6,6 @@ import com.tylersuehr.cleanarchitecture.domain.UseCase;
  * Copyright 2017 Tyler Suehr
  * Created by tyler on 7/4/2017.
  *
- * <b>Summary</b>
  * Deletes all people in the repository.
  *
  * <b>Request</b>: None.

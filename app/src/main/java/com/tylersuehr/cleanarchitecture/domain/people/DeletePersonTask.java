@@ -7,7 +7,6 @@ import com.tylersuehr.cleanarchitecture.domain.UseCase;
  * Copyright 2017 Tyler Suehr
  * Created by tyler on 7/3/2017.
  *
- * <b>Summary</b>
  * Delete a person in the repository.
  *
  * <b>Request</b>: Valid {@link Person}.

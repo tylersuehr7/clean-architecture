@@ -8,7 +8,6 @@ import java.util.UUID;
  * Copyright 2017 Tyler Suehr
  * Created by tyler on 7/3/2017.
  *
- * <b>Summary</b>
  * Saves a person in the repository.
  *
  * <b>Request</b>: Valid {@link Request}.

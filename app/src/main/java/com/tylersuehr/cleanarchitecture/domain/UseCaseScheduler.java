@@ -8,7 +8,6 @@ import java.util.concurrent.TimeUnit;
  * Copyright 2017 Tyler Suehr
  * Created by tyler on 7/3/2017.
  *
- * <b>Summary</b>
  * This is used to schedule execution for each use case, to ensure that it runs on a valid
  * worker thread, and to ensure that the use case calls back on the UI thread.
  */

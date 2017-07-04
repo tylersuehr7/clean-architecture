@@ -9,7 +9,6 @@ import java.util.List;
  * Copyright 2017 Tyler Suehr
  * Created by tyler on 7/3/2017.
  *
- * <b>Summary</b>
  * Loads all people from the repository.
  *
  * <b>Request</b>: none.

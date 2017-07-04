@@ -4,7 +4,6 @@ package com.tylersuehr.cleanarchitecture.domain;
  * Copyright 2017 Tyler Suehr
  * Created by tyler on 7/3/2017.
  *
- * <b>Summary</b>
  * Defines callbacks for the use case execution.
  */
 public interface UseCaseCallback<V> {
