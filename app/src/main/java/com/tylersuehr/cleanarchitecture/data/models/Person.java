@@ -3,6 +3,8 @@ package com.tylersuehr.cleanarchitecture.data.models;
 /**
  * Copyright 2017 Tyler Suehr
  * Created by tyler on 7/3/2017.
+ *
+ * This represents a person and their basic information.
  */
 public class Person extends Entity {
     private String firstName;

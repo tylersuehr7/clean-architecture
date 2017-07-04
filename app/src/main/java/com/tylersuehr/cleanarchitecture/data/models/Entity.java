@@ -4,7 +4,6 @@ package com.tylersuehr.cleanarchitecture.data.models;
  * Copyright 2017 Tyler Suehr
  * Created by tyler on 7/3/2017.
  *
- * <b>Summary</b>
  * The base model for anything we want to store in the SQLite database.
  *
  * {@link #equals(Object)}: Overridden to check if the ids of the Entities match.
