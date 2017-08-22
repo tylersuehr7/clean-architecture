@@ -9,7 +9,7 @@ package com.tylersuehr.cleanarchitecture.data.models;
  * {@link #equals(Object)}: Overridden to check if the ids of the Entities match.
  * {@link #toString()}: Overridden to display the Entity's id.
  */
-public class Entity {
+public abstract class Entity {
     private Object id;
 
 

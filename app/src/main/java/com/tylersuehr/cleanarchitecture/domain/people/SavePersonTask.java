@@ -1,5 +1,4 @@
 package com.tylersuehr.cleanarchitecture.domain.people;
-import com.tylersuehr.cleanarchitecture.data.exceptions.UseCaseFailedException;
 import com.tylersuehr.cleanarchitecture.data.models.Person;
 import com.tylersuehr.cleanarchitecture.data.repositories.people.IPersonRepository;
 import com.tylersuehr.cleanarchitecture.domain.UseCase;
@@ -38,11 +37,9 @@ public class SavePersonTask extends UseCase<SavePersonTask.Request, Person> {
             this.personRepo.savePerson(person);
 
             // Callback with the valid model
-            getCallback().onSuccess(person);
+            pass(person);
         } catch (Exception ex) {
-            UseCaseFailedException wrap = new UseCaseFailedException(this, ex);
-            logFail(wrap);
-            getCallback().onFailure(wrap);
+            fail(ex);
         }
     }
 

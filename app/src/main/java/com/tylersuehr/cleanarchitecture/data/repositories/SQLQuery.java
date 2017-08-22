@@ -13,7 +13,7 @@ import java.util.List;
  *
  * Basic utility to help with querying the local SQLite database.
  */
-public final class QueryUtil {
+public final class SQLQuery {
     /**
      * Queries the SQLite database for a single object.
      * @param db {@link SQLiteDatabase}

@@ -4,7 +4,7 @@ import com.tylersuehr.cleanarchitecture.data.mappers.IEntityMapper;
 import com.tylersuehr.cleanarchitecture.data.models.Person;
 import com.tylersuehr.cleanarchitecture.data.repositories.IDatabaseClient;
 import com.tylersuehr.cleanarchitecture.data.repositories.ListCallback;
-import com.tylersuehr.cleanarchitecture.data.repositories.QueryUtil;
+import com.tylersuehr.cleanarchitecture.data.repositories.SQLQuery;
 import com.tylersuehr.cleanarchitecture.data.repositories.SingleCallback;
 import static com.tylersuehr.cleanarchitecture.data.repositories.DatabaseContract.People;
 /**
@@ -41,12 +41,12 @@ public class LocalPersonRepository implements IPersonRepository {
 
     @Override
     public void findAllPeople(ListCallback<Person> callback) {
-        QueryUtil.queryForEmpty(db, mapper, People.NAME, null, null, null, callback);
+        SQLQuery.queryForEmpty(db, mapper, People.NAME, null, null, null, callback);
     }
 
     @Override
     public void findPersonById(String personId, SingleCallback<Person> callback) {
         String where = People.COL_ID + "='" + personId + "'";
-        QueryUtil.query(db, mapper, People.NAME, where, callback);
+        SQLQuery.query(db, mapper, People.NAME, where, callback);
     }
 }

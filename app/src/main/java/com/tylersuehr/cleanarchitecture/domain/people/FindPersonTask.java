@@ -1,5 +1,4 @@
 package com.tylersuehr.cleanarchitecture.domain.people;
-import com.tylersuehr.cleanarchitecture.data.exceptions.UseCaseFailedException;
 import com.tylersuehr.cleanarchitecture.data.models.Person;
 import com.tylersuehr.cleanarchitecture.data.repositories.SingleCallback;
 import com.tylersuehr.cleanarchitecture.data.repositories.people.IPersonRepository;
@@ -32,9 +31,7 @@ public class FindPersonTask extends UseCase<String, Person> {
 
             @Override
             public void onNotAvailable(Exception ex) {
-                UseCaseFailedException wrap = new UseCaseFailedException(FindPersonTask.this, ex);
-                logFail(wrap);
-                getCallback().onFailure(wrap);
+                fail(ex);
             }
         });
     }

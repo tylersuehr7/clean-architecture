@@ -23,7 +23,6 @@ import java.util.List;
  * Copyright 2017 Tyler Suehr
  * Created by tyler on 7/3/2017.
  *
- * <b>Summary</b>
  * This activity will allow the user to see a list of all the people they've added and will also
  * allow them to manage this list (using basic add and clear).
  *

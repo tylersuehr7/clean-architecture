@@ -1,5 +1,4 @@
 package com.tylersuehr.cleanarchitecture.domain.people;
-import com.tylersuehr.cleanarchitecture.data.exceptions.UseCaseFailedException;
 import com.tylersuehr.cleanarchitecture.data.repositories.people.IPersonRepository;
 import com.tylersuehr.cleanarchitecture.domain.UseCase;
 /**
@@ -24,9 +23,7 @@ public class DeleteAllPeopleTask extends UseCase<Object, Object> {
         try {
             this.personRepo.deletePerson(null);
         } catch (Exception ex) {
-            UseCaseFailedException wrap = new UseCaseFailedException(this, ex);
-            logFail(wrap);
-            getCallback().onFailure(wrap);
+            fail(ex);
         }
     }
 }

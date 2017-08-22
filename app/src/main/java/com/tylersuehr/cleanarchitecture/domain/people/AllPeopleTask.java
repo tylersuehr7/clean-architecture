@@ -1,5 +1,4 @@
 package com.tylersuehr.cleanarchitecture.domain.people;
-import com.tylersuehr.cleanarchitecture.data.exceptions.UseCaseFailedException;
 import com.tylersuehr.cleanarchitecture.data.models.Person;
 import com.tylersuehr.cleanarchitecture.data.repositories.ListCallback;
 import com.tylersuehr.cleanarchitecture.data.repositories.people.IPersonRepository;
@@ -26,15 +25,13 @@ public class AllPeopleTask extends UseCase<Object, List<Person>> {
     protected void onExecute() {
         this.personRepo.findAllPeople(new ListCallback<Person>() {
             @Override
-            public void onListLoaded(List<Person> objects) {
-                getCallback().onSuccess(objects);
+            public void onListLoaded(List<Person> people) {
+                pass(people);
             }
 
             @Override
             public void onNotAvailable(Exception ex) {
-                UseCaseFailedException wrap = new UseCaseFailedException(AllPeopleTask.this, ex);
-                logFail(wrap);
-                getCallback().onFailure(wrap);
+                fail(ex);
             }
         });
     }

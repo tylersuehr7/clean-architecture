@@ -18,8 +18,22 @@ public abstract class UseCase<T, V> {
 
     protected abstract void onExecute();
 
-    protected void logFail(Exception ex) {
-        Log.wtf("USE_CASE", ex);
+    /**
+     * Convenience method to make use case pass.
+     * @param response Response
+     */
+    protected void pass(V response) {
+        Log.i(getClass().getSimpleName().toUpperCase(), "UseCase successful!");
+        this.callback.onSuccess(response);
+    }
+
+    /**
+     * Convenience method to make use case fail.
+     * @param ex {@link Exception}
+     */
+    protected void fail(Exception ex) {
+        Log.wtf(getClass().getSimpleName().toUpperCase(), ex);
+        this.callback.onFailure(ex);
     }
 
     public UseCaseCallback<V> getCallback() {
