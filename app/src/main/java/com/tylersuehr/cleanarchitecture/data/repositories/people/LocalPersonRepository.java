@@ -2,16 +2,19 @@ package com.tylersuehr.cleanarchitecture.data.repositories.people;
 import android.database.sqlite.SQLiteDatabase;
 import com.tylersuehr.cleanarchitecture.data.mappers.IEntityMapper;
 import com.tylersuehr.cleanarchitecture.data.models.Person;
+import com.tylersuehr.cleanarchitecture.data.repositories.Callbacks;
 import com.tylersuehr.cleanarchitecture.data.repositories.IDatabaseClient;
-import com.tylersuehr.cleanarchitecture.data.repositories.ListCallback;
 import com.tylersuehr.cleanarchitecture.data.repositories.SQLQuery;
-import com.tylersuehr.cleanarchitecture.data.repositories.SingleCallback;
+
 import static com.tylersuehr.cleanarchitecture.data.repositories.DatabaseContract.People;
+
 /**
  * Copyright 2017 Tyler Suehr
- * Created by tyler on 7/3/2017.
  *
  * This manages the local data source for {@link IPersonRepository}.
+ *
+ * @author Tyler Suehr
+ * @version 1.0
  */
 public class LocalPersonRepository implements IPersonRepository {
     private final IEntityMapper<Person> mapper;
@@ -40,12 +43,12 @@ public class LocalPersonRepository implements IPersonRepository {
     }
 
     @Override
-    public void findAllPeople(ListCallback<Person> callback) {
+    public void findAllPeople(Callbacks.IList<Person> callback) {
         SQLQuery.queryForEmpty(db, mapper, People.NAME, null, null, null, callback);
     }
 
     @Override
-    public void findPersonById(String personId, SingleCallback<Person> callback) {
+    public void findPersonById(String personId, Callbacks.ISingle<Person> callback) {
         String where = People.COL_ID + "='" + personId + "'";
         SQLQuery.query(db, mapper, People.NAME, where, callback);
     }

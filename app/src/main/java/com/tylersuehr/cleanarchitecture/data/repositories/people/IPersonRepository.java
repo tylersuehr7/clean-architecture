@@ -1,17 +1,45 @@
 package com.tylersuehr.cleanarchitecture.data.repositories.people;
 import android.support.annotation.Nullable;
 import com.tylersuehr.cleanarchitecture.data.models.Person;
-import com.tylersuehr.cleanarchitecture.data.repositories.ListCallback;
-import com.tylersuehr.cleanarchitecture.data.repositories.SingleCallback;
+import com.tylersuehr.cleanarchitecture.data.repositories.Callbacks;
+
 /**
  * Copyright 2017 Tyler Suehr
- * Created by tyler on 7/3/2017.
  *
- * Defines what our person repository should look like.
+ * Defines the core methods needed to manipulate the person repository.
+ *
+ * @author Tyler Suehr
+ * @version 1.0
  */
 public interface IPersonRepository {
-    void savePerson(Person person);
-    void deletePerson(@Nullable Person person);
-    void findAllPeople(ListCallback<Person> callback);
-    void findPersonById(String personId, SingleCallback<Person> callback);
+    /**
+     * Saves a person in the repository. Creates a new entry for a
+     * new person, and updates existing entry if they already exist.
+     * @param person {@link Person}
+     *
+     * @throws Exception if save fails
+     */
+    void savePerson(Person person) throws Exception;
+
+    /**
+     * Deletes a person in the repository. Leave null to delete all
+     * people in the repository.
+     * @param person {@link Person}
+     *
+     * @throws Exception if deletion fails
+     */
+    void deletePerson(@Nullable Person person) throws Exception;
+
+    /**
+     * Finds all people in the repository.
+     * @param callback {@link Callbacks.IList}
+     */
+    void findAllPeople(Callbacks.IList<Person> callback);
+
+    /**
+     * Finds a person in the repository using their profile ID.
+     * @param personId Person's profile ID
+     * @param callback {@link Callbacks.ISingle}
+     */
+    void findPersonById(String personId, Callbacks.ISingle<Person> callback);
 }

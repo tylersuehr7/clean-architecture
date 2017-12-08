@@ -1,18 +1,20 @@
 package com.tylersuehr.cleanarchitecture.data.repositories.people;
 import com.tylersuehr.cleanarchitecture.data.models.Person;
-import com.tylersuehr.cleanarchitecture.data.repositories.ListCallback;
-import com.tylersuehr.cleanarchitecture.data.repositories.SingleCallback;
+import com.tylersuehr.cleanarchitecture.data.repositories.Callbacks;
+
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+
 /**
  * Copyright 2017 Tyler Suehr
- * Created by tyler on 7/3/2017.
  *
  * This manages all data sources for {@link IPersonRepository}.
+ * Note: you can make as many repositories as needed for different data sources.
  *
- * NOTE: We also utilize a basic caching system here too.
+ * @author Tyler Suehr
+ * @version 1.0
  */
 public final class PersonRepository implements IPersonRepository {
     private static volatile PersonRepository instance;
@@ -26,21 +28,25 @@ public final class PersonRepository implements IPersonRepository {
         this.local = local;
     }
 
-    public static synchronized PersonRepository getInstance(IPersonRepository local) {
+    public static PersonRepository getInstance(IPersonRepository local) {
         if (instance == null) {
-            instance = new PersonRepository(local);
+            synchronized (PersonRepository.class) {
+                if (instance == null) {
+                    instance = new PersonRepository(local);
+                }
+            }
         }
         return instance;
     }
 
     @Override
-    public void savePerson(Person person) {
+    public void savePerson(Person person) throws Exception {
         this.local.savePerson(person);
         addToCache(person);
     }
 
     @Override
-    public void deletePerson(Person person) {
+    public void deletePerson(Person person) throws Exception {
         this.local.deletePerson(person);
         if (cache != null && person != null) {
             this.cache.remove(person.getId());
@@ -48,7 +54,7 @@ public final class PersonRepository implements IPersonRepository {
     }
 
     @Override
-    public void findAllPeople(final ListCallback<Person> callback) {
+    public void findAllPeople(final Callbacks.IList<Person> callback) {
         // Attempt to load all from cache
         if (validCache()) {
             callback.onListLoaded(new ArrayList<>(cache.values()));
@@ -56,7 +62,7 @@ public final class PersonRepository implements IPersonRepository {
         }
 
         // Fallback by loading all from local data source
-        this.local.findAllPeople(new ListCallback<Person>() {
+        this.local.findAllPeople(new Callbacks.IList<Person>() {
             @Override
             public void onListLoaded(List<Person> objects) {
                 refreshCache(objects);
@@ -71,7 +77,7 @@ public final class PersonRepository implements IPersonRepository {
     }
 
     @Override
-    public void findPersonById(String personId, final SingleCallback<Person> callback) {
+    public void findPersonById(String personId, final Callbacks.ISingle<Person> callback) {
         // Attempt to find a person from cache
         if (validCache()) {
             Person person = cache.get(personId);
@@ -82,7 +88,7 @@ public final class PersonRepository implements IPersonRepository {
         }
 
         // Fallback by loading person from local data source
-        this.local.findPersonById(personId, new SingleCallback<Person>() {
+        this.local.findPersonById(personId, new Callbacks.ISingle<Person>() {
             @Override
             public void onSingleLoaded(Person object) {
                 addToCache(object);
