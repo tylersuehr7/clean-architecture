@@ -19,9 +19,9 @@ import com.tylersuehr.cleanarchitecture.ui.about.AboutActivity;
 import com.tylersuehr.cleanarchitecture.ui.shared.AlertUtils;
 import com.tylersuehr.cleanarchitecture.ui.views.EmptyStateRecyclerView;
 import java.util.List;
+
 /**
  * Copyright 2017 Tyler Suehr
- * Created by tyler on 7/3/2017.
  *
  * This activity will allow the user to see a list of all the people they've added and will also
  * allow them to manage this list (using basic add and clear).
@@ -42,6 +42,9 @@ import java.util.List;
  * This is outside the scope of this example though, and we have the orientation set to portrait.
  *
  * Presenter: {@link PeoplePresenter}
+ *
+ * @author Tyler Suehr
+ * @version 1.0
  */
 public class PeopleActivity extends AppCompatActivity implements PeoplePresenter.PeopleView {
     private PeoplePresenter presenter;

@@ -15,12 +15,15 @@ import android.widget.TextView;
 import com.tylersuehr.cleanarchitecture.R;
 import com.tylersuehr.cleanarchitecture.ui.shared.SpanUtils;
 import com.tylersuehr.cleanarchitecture.ui.views.ElasticFrameLayout;
+
 /**
  * Copyright 2017 Tyler Suehr
- * Created by tyler on 7/4/2017.
  *
  * This activity just allows the user to see simple 'about' information to explain what this
  * example application is for.
+ *
+ * @author Tyler Suehr
+ * @version 1.0
  */
 public class AboutActivity extends AppCompatActivity {
     @Override

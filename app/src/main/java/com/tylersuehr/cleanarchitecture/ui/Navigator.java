@@ -3,11 +3,14 @@ import android.app.Activity;
 import android.content.Intent;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.ActivityOptionsCompat;
+
 /**
  * Copyright 2017 Tyler Suehr
- * Created by tyler on 7/4/2017.
  *
  * Utility to help with manipulating Intent actions.
+ *
+ * @author Tyler Suehr
+ * @version 1.0
  */
 public final class Navigator {
     private final Activity activity;

@@ -1,5 +1,4 @@
 package com.tylersuehr.cleanarchitecture.ui.people;
-import com.tylersuehr.cleanarchitecture.data.exceptions.EmptyQueryException;
 import com.tylersuehr.cleanarchitecture.data.models.Person;
 import com.tylersuehr.cleanarchitecture.domain.UseCaseCallback;
 import com.tylersuehr.cleanarchitecture.domain.people.AllPeopleTask;
@@ -8,11 +7,14 @@ import com.tylersuehr.cleanarchitecture.domain.people.SavePersonTask;
 import com.tylersuehr.cleanarchitecture.ui.shared.Mock;
 import com.tylersuehr.cleanarchitecture.ui.BasePresenter;
 import java.util.List;
+
 /**
  * Copyright 2017 Tyler Suehr
- * Created by tyler on 7/3/2017.
  *
  * View: {@link PeopleActivity}
+ *
+ * @author Tyler Suehr
+ * @version 1.0
  */
 class PeoplePresenter extends BasePresenter<PeoplePresenter.PeopleView> {
     private final AllPeopleTask allPeopleTask;

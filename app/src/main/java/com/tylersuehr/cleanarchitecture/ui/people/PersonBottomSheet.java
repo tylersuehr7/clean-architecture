@@ -9,12 +9,15 @@ import android.support.v7.widget.AppCompatEditText;
 import android.text.TextUtils;
 import android.view.View;
 import com.tylersuehr.cleanarchitecture.R;
+
 /**
  * Copyright 2017 Tyler Suehr
- * Created by tyler on 7/4/2017.
  *
  * This is a simple Bottom Sheet dialog to allow the user to input a first name, last name, and
  * age, and will callback with the inputted data using {@link PersonDialogListener}.
+ *
+ * @author Tyler Suehr
+ * @version 1.0
  */
 public class PersonBottomSheet extends BottomSheetDialogFragment implements View.OnClickListener {
     private AppCompatEditText inputFirst;

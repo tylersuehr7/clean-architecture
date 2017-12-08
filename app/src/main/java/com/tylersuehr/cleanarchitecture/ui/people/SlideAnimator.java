@@ -11,11 +11,14 @@ import android.view.animation.AnimationUtils;
 import android.view.animation.Interpolator;
 import java.util.ArrayList;
 import java.util.List;
+
 /**
  * Copyright 2017 Tyler Suehr
- * Created by tyler on 7/4/2017.
  *
  * An animator for RecyclerView that fades & slides newly added items from a given direction.
+ *
+ * @author Tyler Suehr
+ * @version 1.0
  */
 class SlideAnimator extends DefaultItemAnimator {
     private final List<RecyclerView.ViewHolder> pendingAdds = new ArrayList<>();

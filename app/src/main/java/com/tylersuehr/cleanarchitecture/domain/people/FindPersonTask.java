@@ -1,6 +1,5 @@
 package com.tylersuehr.cleanarchitecture.domain.people;
 import com.tylersuehr.cleanarchitecture.data.models.Person;
-import com.tylersuehr.cleanarchitecture.data.repositories.SingleCallback;
 import com.tylersuehr.cleanarchitecture.data.repositories.people.IPersonRepository;
 import com.tylersuehr.cleanarchitecture.domain.UseCase;
 

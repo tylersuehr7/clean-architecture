@@ -2,16 +2,18 @@ package com.tylersuehr.cleanarchitecture.domain;
 
 /**
  * Copyright 2017 Tyler Suehr
- * Created by tyler on 7/3/2017.
  *
- * Defines callbacks for the use case execution.
+ * This defines callbacks for our {@link UseCase} executions.
+ *
+ * @author Tyler Suehr
+ * @version 1.0
  */
-public interface UseCaseCallback<V> {
+public interface UseCaseCallback<Response> {
     /**
      * Called when a use case successfully executes.
      * @param response Contains a response from the use case
      */
-    void onSuccess(V response);
+    void onSuccess(Response response);
 
     /**
      * Called when a use case fails to execute.

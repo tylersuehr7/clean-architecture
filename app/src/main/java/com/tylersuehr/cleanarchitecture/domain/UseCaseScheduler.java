@@ -4,16 +4,28 @@ import android.os.Looper;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
+
 /**
  * Copyright 2017 Tyler Suehr
- * Created by tyler on 7/3/2017.
  *
- * This is used to schedule execution for each use case, to ensure that it runs on a valid
- * worker thread, and to ensure that the use case calls back on the UI thread.
+ * This schedules the execution of a {@link UseCase}.
+ *
+ * This is also what we will use to ensure that a UseCase is run on a worker-Thread and its
+ * callbacks are triggered on the UI-Thread. This is also where we'll manage Thread creation.
+ *
+ * The same instance of this object should be reused by anything that will run UseCases because
+ * it will be using the same Thread-pool and factory for Thread creation. Therefore, to acquire
+ * an instance of this object you must call {@link #getInstance()}.
+ *
+ * @author Tyler Suehr
+ * @version 1.0
  */
 public final class UseCaseScheduler {
-    private static UseCaseScheduler instance;
+    /* Stores singleton instance of scheduler */
+    private static volatile UseCaseScheduler instance;
+    /* Stores reference to thread-pool executor that's lazy loaded */
     private static ThreadPoolExecutor executor;
+    /* Stores handler for running on UI-Thread */
     private final Handler handler;
 
 
@@ -21,24 +33,30 @@ public final class UseCaseScheduler {
         this.handler = new Handler(Looper.getMainLooper());
     }
 
-    public static synchronized UseCaseScheduler getInstance() {
+    public static UseCaseScheduler getInstance() {
         if (instance == null) {
-            UseCaseScheduler.instance = new UseCaseScheduler();
-            UseCaseScheduler.executor = getExecutor();
+            synchronized (UseCaseScheduler.class) {
+                if (instance == null) {
+                    instance = new UseCaseScheduler();
+                }
+            }
         }
         return instance;
     }
 
     /**
-     * Executes a use case on a worker thread.
+     * Prepares a given use case and then executes it on a new Thread.
+     *
      * @param useCase {@link UseCase}
-     * @param request Use case request
+     * @param request Request data
      * @param callback {@link UseCaseCallback}
+     * @param <T> Request data type
+     * @param <V> Response data type
      */
     public <T, V> void execute(final UseCase<T, V> useCase, T request, UseCaseCallback<V> callback) {
         useCase.setCallback(new UICallback<>(handler, callback));
         useCase.setRequest(request);
-        executor.execute(new Runnable() {
+        getExecutor().execute(new Runnable() {
             @Override
             public void run() {
                 useCase.onExecute();
@@ -47,7 +65,7 @@ public final class UseCaseScheduler {
     }
 
     /**
-     * Lazy-loads a valid instance of {@link ThreadPoolExecutor}.
+     * Lazy-loads an instance of a thread-pool executor.
      * @return {@link ThreadPoolExecutor}
      */
     private static ThreadPoolExecutor getExecutor() {
@@ -63,21 +81,21 @@ public final class UseCaseScheduler {
 
 
     /**
-     * Ensures that our {@link UseCaseCallback} methods are run on the UI thread.
+     * Internal implementation of {@link UseCaseCallback} that ensures the provided
+     * callback's methods are run on the UI-Thread.
      */
     private static final class UICallback<V> implements UseCaseCallback<V> {
         private final UseCaseCallback<V> callback;
         private final Handler handler;
 
-
-        private UICallback(Handler handler, UseCaseCallback<V> callback) {
+        UICallback(final Handler handler, final UseCaseCallback<V> callback) {
             this.handler = handler;
             this.callback = callback;
         }
 
         @Override
         public void onSuccess(final V response) {
-            handler.post(new Runnable() {
+            this.handler.post(new Runnable() {
                 @Override
                 public void run() {
                     callback.onSuccess(response);
@@ -87,7 +105,7 @@ public final class UseCaseScheduler {
 
         @Override
         public void onFailure(final Exception ex) {
-            handler.post(new Runnable() {
+            this.handler.post(new Runnable() {
                 @Override
                 public void run() {
                     callback.onFailure(ex);

@@ -17,13 +17,16 @@ import android.widget.FrameLayout;
 import com.tylersuehr.cleanarchitecture.R;
 import java.util.ArrayList;
 import java.util.List;
+
 /**
  * Copyright 2016 Tyler Suehr
- * Created by tyler on 8/11/2016.
  *
  * A view group that responds to nested scrolls to create drag-dismissible layouts.
  *
  * NOTE: ONLY COMPATIBLE WITH API 21+
+ *
+ * @author Tyler Suehr
+ * @version 1.0
  */
 @TargetApi(21)
 public class ElasticFrameLayout extends FrameLayout {

@@ -3,11 +3,14 @@ import android.support.v7.widget.RecyclerView;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+
 /**
  * Copyright 2017 Tyler Suehr
- * Created by tyler on 7/3/2017.
  *
  * Just a simple RecyclerView adapter that manages a list of items.
+ *
+ * @author Tyler Suehr
+ * @version 1.0
  */
 public abstract class BaseAdapter<T, VH extends RecyclerView.ViewHolder> extends RecyclerView.Adapter<VH> {
     private final List<T> items;

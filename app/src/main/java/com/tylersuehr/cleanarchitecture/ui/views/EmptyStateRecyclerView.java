@@ -11,11 +11,14 @@ import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
 import com.tylersuehr.cleanarchitecture.R;
+
 /**
  * Copyright 2017 Tyler Suehr
- * Created by tyler on 7/4/2017.
  *
  * A normal RecyclerView that has the ability to display a placeholder for an 'empty state'.
+ *
+ * @author Tyler Suehr
+ * @version 1.0
  */
 public class EmptyStateRecyclerView extends RecyclerView {
     private final Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);

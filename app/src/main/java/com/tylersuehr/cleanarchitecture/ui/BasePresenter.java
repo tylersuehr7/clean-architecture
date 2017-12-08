@@ -1,10 +1,13 @@
 package com.tylersuehr.cleanarchitecture.ui;
 import com.tylersuehr.cleanarchitecture.domain.UseCaseScheduler;
+
 /**
  * Copyright 2017 Tyler Suehr
- * Created by tyler on 7/3/2017.
  *
  * This is the base presenter for all presenters.
+ *
+ * @author Tyler Suehr
+ * @version 1.0
  */
 public abstract class BasePresenter<T> {
     protected final UseCaseScheduler scheduler = UseCaseScheduler.getInstance();

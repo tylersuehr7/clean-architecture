@@ -11,9 +11,12 @@ import com.tylersuehr.cleanarchitecture.R;
 import com.tylersuehr.cleanarchitecture.data.models.Person;
 import com.tylersuehr.cleanarchitecture.ui.BaseAdapter;
 import com.tylersuehr.cleanarchitecture.ui.views.CircleImageView;
+
 /**
  * Copyright 2017 Tyler Suehr
- * Created by tyler on 7/3/2017.
+ *
+ * @author Tyler Suehr
+ * @version 1.0
  */
 class PersonAdapter extends BaseAdapter<Person, PersonAdapter.Holder> {
     @Override
