@@ -3,14 +3,16 @@ import com.tylersuehr.cleanarchitecture.data.models.Person;
 import com.tylersuehr.cleanarchitecture.data.repositories.SingleCallback;
 import com.tylersuehr.cleanarchitecture.data.repositories.people.IPersonRepository;
 import com.tylersuehr.cleanarchitecture.domain.UseCase;
+
 /**
  * Copyright 2017 Tyler Suehr
- * Created by tyler on 7/3/2017.
  *
- * Finds a person in the repository.
+ * Business logic to find a person in the repository.
+ * Request: Person's id.
+ * Response: Valid {@link Person}.
  *
- * <b>Request</b>: Person's id.
- * <b>Response</b>: Valid {@link Person}.
+ * @author Tyler Suehr
+ * @version 1.0
  */
 public class FindPersonTask extends UseCase<String, Person> {
     private final IPersonRepository personRepo;
@@ -25,8 +27,8 @@ public class FindPersonTask extends UseCase<String, Person> {
         final String personId = getRequest();
         this.personRepo.findPersonById(personId, new SingleCallback<Person>() {
             @Override
-            public void onSingleLoaded(Person object) {
-                getCallback().onSuccess(object);
+            public void onSingleLoaded(Person foundPerson) {
+                pass(foundPerson);
             }
 
             @Override
