@@ -13,13 +13,11 @@ import com.tylersuehr.cleanarchitecture.data.repositories.Callbacks;
  */
 public interface IPersonRepository {
     /**
-     * Saves a person in the repository. Creates a new entry for a
-     * new person, and updates existing entry if they already exist.
+     * Creates a new person in the repository.
      * @param person {@link Person}
-     *
-     * @throws Exception if save fails
+     * @throws Exception if create fails
      */
-    void savePerson(Person person) throws Exception;
+    void createPerson(Person person) throws Exception;
 
     /**
      * Deletes a person in the repository. Leave null to delete all

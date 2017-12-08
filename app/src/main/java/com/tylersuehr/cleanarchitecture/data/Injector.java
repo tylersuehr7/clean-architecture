@@ -16,7 +16,7 @@ import com.tylersuehr.cleanarchitecture.data.repositories.people.PersonRepositor
  * @author Tyler Suehr
  * @version 1.0
  */
-public final class Injection {
+public final class Injector {
     public static PersonRepository providePeopleRepo(Context appCtx) {
         return PersonRepository.getInstance(new LocalPersonRepository(
                 DatabaseClient.getInstance(appCtx), new PersonMapper()

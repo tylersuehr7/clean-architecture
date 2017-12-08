@@ -1,5 +1,6 @@
 package com.tylersuehr.cleanarchitecture.domain.people;
 import com.tylersuehr.cleanarchitecture.data.models.Person;
+import com.tylersuehr.cleanarchitecture.data.repositories.Callbacks;
 import com.tylersuehr.cleanarchitecture.data.repositories.people.IPersonRepository;
 import com.tylersuehr.cleanarchitecture.domain.UseCase;
 import java.util.List;
@@ -24,7 +25,7 @@ public class AllPeopleTask extends UseCase<Object, List<Person>> {
 
     @Override
     protected void onExecute() {
-        this.personRepo.findAllPeople(new ListCallback<Person>() {
+        this.personRepo.findAllPeople(new Callbacks.IList<Person>() {
             @Override
             public void onListLoaded(List<Person> people) {
                 pass(people);

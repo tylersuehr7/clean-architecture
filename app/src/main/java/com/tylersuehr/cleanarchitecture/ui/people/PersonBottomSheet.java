@@ -36,9 +36,10 @@ public class PersonBottomSheet extends BottomSheetDialogFragment implements View
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         View v = View.inflate(getContext(), R.layout.fragment_dialog_person, null);
-        this.inputFirst = (AppCompatEditText)v.findViewById(R.id.input_first);
-        this.inputLast = (AppCompatEditText)v.findViewById(R.id.input_last);
-        this.inputAge = (AppCompatEditText)v.findViewById(R.id.input_age);
+
+        this.inputFirst = v.findViewById(R.id.input_first);
+        this.inputLast = v.findViewById(R.id.input_last);
+        this.inputAge = v.findViewById(R.id.input_age);
         v.findViewById(R.id.button_create).setOnClickListener(this);
 
         BottomSheetDialog dialog = new BottomSheetDialog(getContext());

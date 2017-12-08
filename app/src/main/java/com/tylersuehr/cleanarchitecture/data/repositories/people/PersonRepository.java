@@ -40,8 +40,8 @@ public final class PersonRepository implements IPersonRepository {
     }
 
     @Override
-    public void savePerson(Person person) throws Exception {
-        this.local.savePerson(person);
+    public void createPerson(Person person) throws Exception {
+        this.local.createPerson(person);
         addToCache(person);
     }
 

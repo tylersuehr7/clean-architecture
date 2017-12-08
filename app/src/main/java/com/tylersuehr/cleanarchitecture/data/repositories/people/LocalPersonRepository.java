@@ -27,8 +27,8 @@ public class LocalPersonRepository implements IPersonRepository {
     }
 
     @Override
-    public void savePerson(Person person) {
-        this.db.insertWithOnConflict(People.NAME, null, mapper.map(person), SQLiteDatabase.CONFLICT_REPLACE);
+    public void createPerson(Person person) {
+        this.db.insertOrThrow(People.NAME, null, mapper.map(person));
     }
 
     @Override
@@ -37,19 +37,19 @@ public class LocalPersonRepository implements IPersonRepository {
             // Delete all rows in table
             this.db.delete(People.NAME, null, null);
         } else {
-            String where = People.COL_ID + "='" + person.getId() + "'";
+            final String where = People.COL_ID + "='" + person.getId() + "'";
             this.db.delete(People.NAME, where, null);
         }
     }
 
     @Override
     public void findAllPeople(Callbacks.IList<Person> callback) {
-        SQLQuery.queryForEmpty(db, mapper, People.NAME, null, null, null, callback);
+        SQLQuery.query(db, mapper, People.NAME, null, null, null, callback);
     }
 
     @Override
     public void findPersonById(String personId, Callbacks.ISingle<Person> callback) {
-        String where = People.COL_ID + "='" + personId + "'";
+        final String where = People.COL_ID + "='" + personId + "'";
         SQLQuery.query(db, mapper, People.NAME, where, callback);
     }
 }

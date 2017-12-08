@@ -1,5 +1,6 @@
 package com.tylersuehr.cleanarchitecture.domain.people;
 import com.tylersuehr.cleanarchitecture.data.models.Person;
+import com.tylersuehr.cleanarchitecture.data.repositories.Callbacks;
 import com.tylersuehr.cleanarchitecture.data.repositories.people.IPersonRepository;
 import com.tylersuehr.cleanarchitecture.domain.UseCase;
 
@@ -24,7 +25,7 @@ public class FindPersonTask extends UseCase<String, Person> {
     @Override
     protected void onExecute() {
         final String personId = getRequest();
-        this.personRepo.findPersonById(personId, new SingleCallback<Person>() {
+        this.personRepo.findPersonById(personId, new Callbacks.ISingle<Person>() {
             @Override
             public void onSingleLoaded(Person foundPerson) {
                 pass(foundPerson);

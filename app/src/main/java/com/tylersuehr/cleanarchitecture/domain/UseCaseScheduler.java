@@ -65,6 +65,17 @@ public final class UseCaseScheduler {
     }
 
     /**
+     * Attempts to shutdown all actively running tasks and will prevent
+     * any pending tasks from executing.
+     */
+    public void shutdownExecution() {
+        if (executor != null) {
+            executor.shutdownNow();
+            executor = null;
+        }
+    }
+
+    /**
      * Lazy-loads an instance of a thread-pool executor.
      * @return {@link ThreadPoolExecutor}
      */

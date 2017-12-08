@@ -82,46 +82,6 @@ public final class SQLQuery {
         }
     }
 
-    /**
-     * Queries the SQLite database for multiple objects. Does not callback with fail if results
-     * are empty.
-     * @param db {@link SQLiteDatabase}
-     * @param mapper {@link IEntityMapper}
-     * @param table Table name
-     * @param where Where clause
-     * @param order OrderBy clause
-     * @param limit Limit clause
-     * @param callback {@link Callbacks.IList}
-     */
-    public static <T extends Entity> void queryForEmpty(
-            SQLiteDatabase db,
-            IEntityMapper<T> mapper,
-            String table,
-            String where,
-            String order,
-            String limit,
-            Callbacks.IList<T> callback) {
-        Cursor c = null;
-        try {
-            c = db.query(table, null, where, null, null, null, order, limit);
-            if (!c.moveToFirst()) {
-                throw new EmptyQueryException(table);
-            }
-
-            List<T> objects = new ArrayList<>(c.getCount());
-            for (int i = 0; i < c.getCount(); i++) {
-                objects.add(mapper.map(c));
-                c.moveToNext();
-            }
-
-            callback.onListLoaded(objects);
-        } catch (Exception ex) {
-            callback.onNotAvailable(ex);
-        } finally {
-            if (c != null) { c.close(); }
-        }
-    }
-
 
     /**
      * Subclass of {@link RuntimeException} to be thrown when any query

@@ -14,11 +14,11 @@ import java.util.UUID;
  * @author Tyler Suehr
  * @version 1.0
  */
-public class SavePersonTask extends UseCase<SavePersonTask.Request, Person> {
+public class CreatePersonTask extends UseCase<CreatePersonTask.Request, Person> {
     private final IPersonRepository personRepo;
 
 
-    public SavePersonTask(IPersonRepository personRepo) {
+    public CreatePersonTask(IPersonRepository personRepo) {
         this.personRepo = personRepo;
     }
 
@@ -36,7 +36,7 @@ public class SavePersonTask extends UseCase<SavePersonTask.Request, Person> {
             person.setAge(request.age);
 
             // Save person in the repository
-            this.personRepo.savePerson(person);
+            this.personRepo.createPerson(person);
 
             // Callback with the valid model
             pass(person);

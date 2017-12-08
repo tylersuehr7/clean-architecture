@@ -3,9 +3,10 @@ import com.tylersuehr.cleanarchitecture.data.models.Person;
 import com.tylersuehr.cleanarchitecture.domain.UseCaseCallback;
 import com.tylersuehr.cleanarchitecture.domain.people.AllPeopleTask;
 import com.tylersuehr.cleanarchitecture.domain.people.DeleteAllPeopleTask;
-import com.tylersuehr.cleanarchitecture.domain.people.SavePersonTask;
+import com.tylersuehr.cleanarchitecture.domain.people.CreatePersonTask;
+import com.tylersuehr.cleanarchitecture.ui.AbstractBasePresenter;
 import com.tylersuehr.cleanarchitecture.ui.shared.Mock;
-import com.tylersuehr.cleanarchitecture.ui.BasePresenter;
+
 import java.util.List;
 
 /**
@@ -16,32 +17,47 @@ import java.util.List;
  * @author Tyler Suehr
  * @version 1.0
  */
-class PeoplePresenter extends BasePresenter<PeoplePresenter.PeopleView> {
+class PeoplePresenter
+        extends AbstractBasePresenter<PeopleContract.IPeopleView>
+        implements PeopleContract.IPeoplePresenter {
     private final AllPeopleTask allPeopleTask;
-    private final SavePersonTask savePersonTask;
+    private final CreatePersonTask savePersonTask;
     private final DeleteAllPeopleTask deleteAllPeopleTask;
 
 
-    PeoplePresenter(PeopleView v, AllPeopleTask task1, SavePersonTask task2, DeleteAllPeopleTask task3) {
-        super(v);
+    PeoplePresenter(AllPeopleTask task1, CreatePersonTask task2, DeleteAllPeopleTask task3) {
         this.allPeopleTask = task1;
         this.savePersonTask = task2;
         this.deleteAllPeopleTask = task3;
     }
 
-    /**
-     * Loads all the people from the repository.
-     */
-    void loadAllPeople() {
-        scheduler.execute(allPeopleTask, null, new UseCaseCallback<List<Person>>() {
+    @Override
+    public void loadPeople() {
+        schedule(allPeopleTask, null, new UseCaseCallback<List<Person>>() {
             @Override
-            public void onSuccess(List<Person> response) {
-                getView().onPeopleReady(response);
+            public void onSuccess(List<Person> people) {
+                getView().onPeopleReady(people);
             }
 
             @Override
             public void onFailure(Exception ex) {
-                if (!(ex.getCause() instanceof EmptyQueryException)) {
+                getView().onPeopleUnavailable();
+            }
+        });
+    }
+
+    @Override
+    public void createPerson(String first, String last, int age) {
+        CreatePersonTask.Request request = new CreatePersonTask.Request(first, last, Mock.randomImage(), age);
+        schedule(savePersonTask, request, new UseCaseCallback<Person>() {
+            @Override
+            public void onSuccess(Person createdPerson) {
+                getView().onPersonCreated(createdPerson);
+            }
+
+            @Override
+            public void onFailure(Exception ex) {
+                if (getView().isDeviceOnline()) {
                     getView().onShowMsg(ex.getMessage());
                 }
             }
@@ -49,45 +65,22 @@ class PeoplePresenter extends BasePresenter<PeoplePresenter.PeopleView> {
     }
 
     /**
-     * Saves a person in the repository.
-     * @param first First name
-     * @param last Last name
-     * @param age Age
-     */
-    void savePerson(String first, String last, int age) {
-        SavePersonTask.Request request = new SavePersonTask.Request(first, last, Mock.randomImage(), age);
-        scheduler.execute(savePersonTask, request, new UseCaseCallback<Person>() {
-            @Override
-            public void onSuccess(Person response) {
-                getView().onPersonSaved(response);
-            }
-
-            @Override
-            public void onFailure(Exception ex) {
-                getView().onShowMsg(ex.getMessage());
-            }
-        });
-    }
-
-    /**
      * Deletes all people from the repository.
      */
-    void clearPeople() {
-        scheduler.execute(deleteAllPeopleTask, null, new UseCaseCallback<Object>() {
+    @Override
+    public void deleteAllPeople() {
+        schedule(deleteAllPeopleTask, null, new UseCaseCallback<Object>() {
             @Override
-            public void onSuccess(Object response) {}
+            public void onSuccess(Object response) {
+                getView().onPeopleDeleted();
+            }
 
             @Override
             public void onFailure(Exception ex) {
-                getView().onShowMsg(ex.getMessage());
+                if (getView().isDeviceOnline()) {
+                    getView().onShowMsg(ex.getMessage());
+                }
             }
         });
-    }
-
-
-    interface PeopleView {
-        void onPeopleReady(List<Person> people);
-        void onPersonSaved(Person person);
-        void onShowMsg(String msg);
     }
 }
