@@ -4,18 +4,20 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.support.annotation.NonNull;
 import static com.tylersuehr.cleanarchitecture.data.repositories.DatabaseContract.*;
+
 /**
  * Copyright 2017 Tyler Suehr
- * Created by tyler on 7/3/2017.
  *
  * This handles our local database management and allows us to interface with the
  * {@link SQLiteDatabase}.
  *
  * We decouple this object by using {@link IDatabaseClient} to provide access to the database.
  *
- * <b>Important</b>
  * We use a singleton so that we prevent creating multiple instances of {@link SQLiteDatabase}
  * and causing a memory leakage.
+ *
+ * @author Tyler Suehr
+ * @version 1.0
  */
 public final class DatabaseClient extends SQLiteOpenHelper implements IDatabaseClient {
     private static final String DB_NAME = "db_clean_architecture";
@@ -29,9 +31,13 @@ public final class DatabaseClient extends SQLiteOpenHelper implements IDatabaseC
         this.db = getWritableDatabase();
     }
 
-    public static synchronized DatabaseClient getInstance(Context c) {
+    public static DatabaseClient getInstance(Context c) {
         if (instance == null) {
-            instance = new DatabaseClient(c);
+            synchronized (DatabaseClient.class) {
+                if (instance == null) {
+                    instance = new DatabaseClient(c);
+                }
+            }
         }
         return instance;
     }

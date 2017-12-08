@@ -7,11 +7,14 @@ import com.tylersuehr.cleanarchitecture.data.mappers.IEntityMapper;
 import com.tylersuehr.cleanarchitecture.data.models.Entity;
 import java.util.ArrayList;
 import java.util.List;
+
 /**
  * Copyright 2017 Tyler Suehr
- * Created by tyler on 7/3/2017.
  *
  * Basic utility to help with querying the local SQLite database.
+ *
+ * @author Tyler Suehr
+ * @version 1.0
  */
 public final class SQLQuery {
     /**
@@ -20,14 +23,14 @@ public final class SQLQuery {
      * @param mapper {@link IEntityMapper}
      * @param table Table name
      * @param where Where clause
-     * @param callback {@link SingleCallback}
+     * @param callback {@link Callbacks.ISingle}
      */
     public static <T extends Entity> void query(
             SQLiteDatabase db,
             IEntityMapper<T> mapper,
             String table,
             String where,
-            SingleCallback<T> callback) {
+            Callbacks.ISingle<T> callback) {
         Cursor c = null;
         try {
             c = db.query(table, null, where, null, null, null, null);
@@ -50,7 +53,7 @@ public final class SQLQuery {
      * @param where Where clause
      * @param order OrderBy clause
      * @param limit Limit clause
-     * @param callback {@link ListCallback}
+     * @param callback {@link Callbacks.IList}
      */
     public static <T extends Entity> void query(
             SQLiteDatabase db,
@@ -59,11 +62,13 @@ public final class SQLQuery {
             String where,
             String order,
             String limit,
-            ListCallback<T> callback) {
+            Callbacks.IList<T> callback) {
         Cursor c = null;
         try {
-            c = db.query(table, null, where, null, null, null, null);
-            c.moveToFirst();
+            c = db.query(table, null, where, null, null, null, order, limit);
+            if (!c.moveToFirst()) {
+                throw new EmptyQueryException(table);
+            }
 
             List<T> objects = new ArrayList<>(c.getCount());
             for (int i = 0; i < c.getCount(); i++) {
@@ -71,9 +76,6 @@ public final class SQLQuery {
                 c.moveToNext();
             }
 
-            if (objects.isEmpty()) {
-                throw new EmptyQueryException(table);
-            }
             callback.onListLoaded(objects);
         } catch (Exception ex) {
             callback.onNotAvailable(new QueryException(table, ex));
@@ -91,7 +93,7 @@ public final class SQLQuery {
      * @param where Where clause
      * @param order OrderBy clause
      * @param limit Limit clause
-     * @param callback {@link ListCallback}
+     * @param callback {@link Callbacks.IList}
      */
     public static <T extends Entity> void queryForEmpty(
             SQLiteDatabase db,
@@ -100,11 +102,13 @@ public final class SQLQuery {
             String where,
             String order,
             String limit,
-            ListCallback<T> callback) {
+            Callbacks.IList<T> callback) {
         Cursor c = null;
         try {
-            c = db.query(table, null, where, null, null, null, null);
-            c.moveToFirst();
+            c = db.query(table, null, where, null, null, null, order, limit);
+            if (!c.moveToFirst()) {
+                throw new EmptyQueryException(table);
+            }
 
             List<T> objects = new ArrayList<>(c.getCount());
             for (int i = 0; i < c.getCount(); i++) {
