@@ -1,15 +1,28 @@
 package com.tylersuehr.cleanarchitecture.ui.shared;
+import android.support.annotation.DrawableRes;
+import com.tylersuehr.cleanarchitecture.R;
 import java.util.Random;
+
 /**
  * Copyright 2017 Tyler Suehr
- * Created by tyler on 7/4/2017.
  *
- * Utility, that can be used anywhere, that provides mock data.
+ * Utility that provides mock data.
+ *
+ * @author Tyler Suehr
+ * @version 1.0
  */
 public final class Mock {
-    public static String randomImage() {
-        String[] images = new String[] { "img_profile_0", "img_profile_2",
-                "img_profile_3", "img_profile_4", "img_profile_5" };
-        return images[new Random().nextInt(images.length)];
+    private static final int[] pics = {
+            R.drawable.img_profile_0,
+            R.drawable.img_profile_2,
+            R.drawable.img_profile_3,
+            R.drawable.img_profile_4,
+            R.drawable.img_profile_5
+    };
+
+    @DrawableRes
+    public static int randomImage() {
+        final Random rnd = new Random();
+        return pics[rnd.nextInt(pics.length - 1)];
     }
 }

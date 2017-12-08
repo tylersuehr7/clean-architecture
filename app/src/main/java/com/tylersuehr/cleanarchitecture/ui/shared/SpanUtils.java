@@ -3,11 +3,14 @@ import android.text.Layout;
 import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.style.AlignmentSpan;
+
 /**
  * Copyright 2017 Tyler Suehr
- * Created by tyler on 7/4/2017.
  *
  * Utility to help manipulate spans.
+ *
+ * @author Tyler Suehr
+ * @version 1.0
  */
 public final class SpanUtils {
     public static Spanned center(CharSequence text) {

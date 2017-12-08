@@ -2,11 +2,14 @@ package com.tylersuehr.cleanarchitecture.ui.shared;
 import android.app.Activity;
 import android.support.design.widget.Snackbar;
 import android.view.View;
+
 /**
  * Copyright 2017 Tyler Suehr
- * Created by tyler on 7/4/2017.
  *
  * Utility to help with alerts such as SnackBars.
+ *
+ * @author Tyler Suehr
+ * @version 1.0
  */
 public final class AlertUtils {
     public static void confirm(Activity a, String msg, String action, final Runnable callback) {

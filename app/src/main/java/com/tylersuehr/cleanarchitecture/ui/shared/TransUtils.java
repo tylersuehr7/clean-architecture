@@ -4,11 +4,14 @@ import android.os.Build;
 import android.support.annotation.TransitionRes;
 import android.transition.Transition;
 import android.transition.TransitionInflater;
+
 /**
  * Copyright 2017 Tyler Suehr
- * Created by tyler on 7/4/2017.
  *
  * Utility to help with various activity transitions.
+ *
+ * @author Tyler Suehr
+ * @version 1.0
  */
 public final class TransUtils {
     public static void setEnter(Activity activity, @TransitionRes int res) {
