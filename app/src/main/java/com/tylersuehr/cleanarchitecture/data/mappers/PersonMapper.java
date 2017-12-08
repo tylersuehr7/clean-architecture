@@ -3,11 +3,14 @@ import android.content.ContentValues;
 import android.database.Cursor;
 import com.tylersuehr.cleanarchitecture.data.models.Person;
 import static com.tylersuehr.cleanarchitecture.data.repositories.DatabaseContract.People;
+
 /**
  * Copyright 2017 Tyler Suehr
- * Created by tyler on 7/3/2017.
  *
  * Concrete implementation of {@link IEntityMapper} for {@link Person} model.
+ *
+ * @author Tyler Suehr
+ * @version 1.0
  */
 public class PersonMapper implements IEntityMapper<Person> {
     @Override

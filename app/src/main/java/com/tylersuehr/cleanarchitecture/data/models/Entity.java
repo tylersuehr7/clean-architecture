@@ -2,18 +2,18 @@ package com.tylersuehr.cleanarchitecture.data.models;
 
 /**
  * Copyright 2017 Tyler Suehr
- * Created by tyler on 7/3/2017.
  *
  * The base model for anything we want to store in the SQLite database.
  *
  * {@link #equals(Object)}: Overridden to check if the ids of the Entities match.
  * {@link #toString()}: Overridden to display the Entity's id.
+ *
+ * @author Tyler Suehr
+ * @version 1.0
  */
 public abstract class Entity {
     private Object id;
 
-
-    public Entity() {}
 
     @Override
     public boolean equals(Object obj) {

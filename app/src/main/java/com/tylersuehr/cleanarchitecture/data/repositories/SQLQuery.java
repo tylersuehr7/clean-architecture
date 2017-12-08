@@ -1,8 +1,6 @@
 package com.tylersuehr.cleanarchitecture.data.repositories;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import com.tylersuehr.cleanarchitecture.data.exceptions.EmptyQueryException;
-import com.tylersuehr.cleanarchitecture.data.exceptions.QueryException;
 import com.tylersuehr.cleanarchitecture.data.mappers.IEntityMapper;
 import com.tylersuehr.cleanarchitecture.data.models.Entity;
 import java.util.ArrayList;
@@ -11,7 +9,7 @@ import java.util.List;
 /**
  * Copyright 2017 Tyler Suehr
  *
- * Basic utility to help with querying the local SQLite database.
+ * Utility to help with querying the local SQLite database.
  *
  * @author Tyler Suehr
  * @version 1.0
@@ -39,7 +37,7 @@ public final class SQLQuery {
             T object = mapper.map(c);
             callback.onSingleLoaded(object);
         } catch (Exception ex) {
-            callback.onNotAvailable(new QueryException(table, ex));
+            callback.onNotAvailable(ex);
         } finally {
             if (c != null) { c.close(); }
         }
@@ -78,7 +76,7 @@ public final class SQLQuery {
 
             callback.onListLoaded(objects);
         } catch (Exception ex) {
-            callback.onNotAvailable(new QueryException(table, ex));
+            callback.onNotAvailable(ex);
         } finally {
             if (c != null) { c.close(); }
         }
@@ -118,9 +116,20 @@ public final class SQLQuery {
 
             callback.onListLoaded(objects);
         } catch (Exception ex) {
-            callback.onNotAvailable(new QueryException(table, ex));
+            callback.onNotAvailable(ex);
         } finally {
             if (c != null) { c.close(); }
+        }
+    }
+
+
+    /**
+     * Subclass of {@link RuntimeException} to be thrown when any query
+     * in the SQLite database has no results.
+     */
+    public static final class EmptyQueryException extends RuntimeException {
+        EmptyQueryException(String table) {
+            super("Query in " + table + " yields no results!");
         }
     }
 }
