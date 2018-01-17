@@ -13,4 +13,4 @@ The `ui` package contains everything needed to display views and allow the user 
 ![Structure Diagram](https://github.com/tylersuehr7/rss-clean-architecture/blob/master/img_application_structure.jpg "Structure Diagram")
 
 ### Screenshots
-![App Screenshot](https://github.com/tylersuehr7/clean-architecture/blob/master/img_screenshot.png "App Screenshot")
+![App Screenshot](https://github.com/tylersuehr7/clean-architecture/blob/master/img_screenshot.png "App Screenshot" width="200")
