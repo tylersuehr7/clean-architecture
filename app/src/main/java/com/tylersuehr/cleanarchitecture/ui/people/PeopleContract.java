@@ -14,10 +14,7 @@ import java.util.List;
  * @author Tyler Suehr
  * @version 1.0
  */
-final class PeopleContract {
-    /* Cannot instantiate */
-    private PeopleContract() {}
-
+interface PeopleContract {
     /**
      * Defines core methods for people presenter.
      */
